@@ -1,2 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import "css";
+@import "tailwindcss";
+
+/* styles.css or styles.scss */
+.dark {
+    background-color: #1a1a1a; /* Dark background */
+    color: #ffffff; /* Light text */
+  }
+  
+  /* Optional: Add dark mode styles for specific Tailwind components */
+  .dark .bg-white {
+    background-color: #2d2d2d; /* Dark background for white elements */
+  }
+  
+  .dark .text-gray-800 {
+    color: #e5e7eb; /* Light text for dark mode */
+  }
