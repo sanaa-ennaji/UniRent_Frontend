@@ -16,7 +16,7 @@
   }
 
   .header-links li.active span::before {
-    background-color: #fcae04;
+    background-color: #35b0ee;
   }
 
   .header-links li:not(.active):hover span::before {
