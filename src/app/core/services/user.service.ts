@@ -9,7 +9,7 @@ import { UserResponseDTO } from '../../models/user-response.model';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8888/api/users/userRegister'; 
+  private apiUrl = 'http://localhost:8888/api/users'; 
 
   constructor(private http: HttpClient) {}
 
