@@ -9,6 +9,7 @@
     justify-content: space-between;
     margin-bottom: 20px;
     gap: 10px;
+    margin-bottom: 4rem;
   }
   
   .role-selection button {
@@ -25,7 +26,7 @@
   }
   
   .role-selection button.active {
-    background-color: #3547ac;
+    background-color: #2b68f7;
     color: white;
   }
   
@@ -37,7 +38,7 @@
   
 
   button[type="submit"] {
-    background-color: #264fa9;
+    background-color: #2b68f7;
     color: white;
     padding: 10px;
     border: none;
@@ -45,7 +46,7 @@
   }
   
   button[type="submit"]:hover {
-    background-color: #246cc4;
+    background-color: #2b68f7;
   }
   
   
