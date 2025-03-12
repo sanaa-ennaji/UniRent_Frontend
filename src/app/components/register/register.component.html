@@ -9,26 +9,17 @@
           <div class="mx-10 space-y-4 md:space-y-6 sm:p-8 w-[35vw]">
            
   
-            <!-- Toggle Buttons -->
-            <div class="flex gap-4 mb-5">
-              <button
-                class="w-full flex items-center justify-center gap-2 py-3 text-lg font-semibold border rounded-lg transition-all duration-300"
-                [ngClass]="selectedRole === 'student' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'"
-                (click)="toggleRole('student')"
-              >
-                <img src="/assets/student-icon.svg" alt="Student Icon" class="w-6 h-6" />
-                Student
-              </button>
-  
-              <button
-                class="w-full flex items-center justify-center gap-2 py-3 text-lg font-semibold border rounded-lg transition-all duration-300"
-                [ngClass]="selectedRole === 'landlord' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'"
-                (click)="toggleRole('landlord')"
-              >
-                <img src="/assets/landlord-icon.svg" alt="Landlord Icon" class="w-6 h-6" />
-                Landlord
-              </button>
-            </div>
+            <div class="role-selection">
+                <button (click)="toggleRole('student')" 
+                        [class.active]="selectedRole === 'student'">
+                  <fa-icon [icon]="faStudent"></fa-icon> Student
+                </button>
+                
+                <button (click)="toggleRole('landlord')" 
+                        [class.active]="selectedRole === 'landlord'">
+                  <fa-icon [icon]="faLandlord"></fa-icon> Landlord
+                </button>
+              </div>
             <h1 class="text-xl mb-10 font-bold leading-tight text-gray-900 md:text-2xl">
                 Sign up as a {{ selectedRole === 'student' ? 'Student' : 'Landlord' }}
               </h1>
