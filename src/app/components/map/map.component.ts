@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './map.component.css'
 })
 export class MapComponent {
-
+private map : any;
+constructor (private universityService; universityService)
 }
