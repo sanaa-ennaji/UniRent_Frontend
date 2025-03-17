@@ -15,3 +15,5 @@
   .dark .text-gray-800 {
     color: #e5e7eb; /* Light text for dark mode */
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
