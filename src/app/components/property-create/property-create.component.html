@@ -1,0 +1,66 @@
+<form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title:</label>
+      <input id="title" formControlName="title" />
+    </div>
+  
+    <div>
+      <label for="address">Address:</label>
+      <input id="address" formControlName="address" />
+    </div>
+  
+    <div>
+      <label for="price">Price:</label>
+      <input id="price" type="number" formControlName="price" />
+    </div>
+  
+    <div>
+      <label for="available">Available:</label>
+      <input id="available" type="checkbox" formControlName="available" />
+    </div>
+  
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+  
+    <div>
+      <label for="type">Type:</label>
+      <input id="type" formControlName="type" />
+    </div>
+  
+    <div>
+      <label for="landlordId">Landlord ID:</label>
+      <input id="landlordId" type="number" formControlName="landlordId" />
+    </div>
+  
+    <div formArrayName="universityIds">
+      <h3>University IDs</h3>
+      <button type="button" (click)="addUniversityId()">Add University ID</button>
+      <div *ngFor="let universityId of universityIds.controls; let i = index">
+        <input [formControlName]="i" type="number" />
+        <button type="button" (click)="removeUniversityId(i)">Remove</button>
+      </div>
+    </div>
+  
+    <div formArrayName="images">
+      <h3>Images</h3>
+      <button type="button" (click)="addImage()">Add Image</button>
+      <div *ngFor="let image of images.controls; let i = index" [formGroupName]="i">
+        <input formControlName="imageUrl" placeholder="Image URL" />
+        <button type="button" (click)="removeImage(i)">Remove</button>
+      </div>
+    </div>
+  
+    <div formArrayName="amenityProperties">
+      <h3>Amenity Properties</h3>
+      <button type="button" (click)="addAmenityProperty()">Add Amenity Property</button>
+      <div *ngFor="let amenityProperty of amenityProperties.controls; let i = index" [formGroupName]="i">
+        <input formControlName="quantity" placeholder="Quantity" type="number" />
+        <input formControlName="amenityId" placeholder="Amenity ID" type="number" />
+        <button type="button" (click)="removeAmenityProperty(i)">Remove</button>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="propertyForm.invalid">Create Property</button>
+  </form>
