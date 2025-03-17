@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PropertyService } from '../../core/services/property.service';
 import { PropertyRequest, ImageRequest, AmenityPropertyRequest } from '../../models/property.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-property-create',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './property-create.component.html',
   styleUrls: ['./property-create.component.css']
 })
 export class PropertyCreateComponent implements OnInit {
-  propertyForm: FormGroup;
+  propertyForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private propertyService: PropertyService) {}
 
