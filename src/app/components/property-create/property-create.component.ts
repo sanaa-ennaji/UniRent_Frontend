@@ -7,6 +7,7 @@ import { NavbarComponent } from "../../shared/navbar/navbar.component";
 import { Navbar2Component } from "../../shared/navbar2/navbar2.component";
 import { DataService } from '../../core/services/data.service';
 import { AuthService } from '../../core/services/auth.service';
+import { CloudinaryService } from '../../core/services/cloudinary.service';
 
 @Component({
   selector: 'app-property-create',
@@ -28,7 +29,8 @@ export class PropertyCreateComponent implements OnInit {
     private fb: FormBuilder,
     private propertyService: PropertyService,
     private dataService: DataService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cloudinaryService  : CloudinaryService
   )
    {
     this.propertyForm = this.fb.group({
@@ -102,26 +104,38 @@ export class PropertyCreateComponent implements OnInit {
     const files = event.target.files;
     if (files) {
       this.selectedFiles = Array.from(files);
-      console.log('Selected Files:', this.selectedFiles);
-      this.propertyForm.patchValue({ images: this.selectedFiles });
     }
   }
 
   onSubmit(): void {
-    console.log('Form Value:', this.propertyForm.value);
-    console.log('Form Valid:', this.propertyForm.valid);
     if (this.propertyForm.valid) {
-      const propertyRequest: PropertyRequest = this.propertyForm.value;
-      this.propertyService.createProperty(propertyRequest).subscribe(
-        (response) => {
-          console.log('Property created successfully:', response);
-          alert('Property created successfully!');
-        },
-        (error) => {
-          console.error('Error creating property:', error);
-          alert('Error creating property. Please try again.');
-        }
+      const uploadObservables = this.selectedFiles.map((file) =>
+        this.cloudinaryService.uploadImage(file)
       );
+
+      Promise.all(uploadObservables.map((obs) => obs.toPromise()))
+        .then((responses) => {
+
+          const imageUrls = responses.map((res) => ({ imageUrl: res.secure_url }));
+
+          this.propertyForm.patchValue({ images: imageUrls });
+
+          const propertyRequest: PropertyRequest = this.propertyForm.value;
+          this.propertyService.createProperty(propertyRequest).subscribe(
+            (response) => {
+              console.log('Property created successfully:', response);
+              alert('Property created successfully!');
+            },
+            (error) => {
+              console.error('Error creating property:', error);
+              alert('Error creating property. Please try again.');
+            }
+          );
+        })
+        .catch((error) => {
+          console.error('Error uploading images:', error);
+          alert('Error uploading images. Please try again.');
+        });
     } else {
       alert('Please fill out the form correctly.');
     }
