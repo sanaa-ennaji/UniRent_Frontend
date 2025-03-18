@@ -7,7 +7,7 @@ import { University } from '../../models/university.model';
   providedIn: 'root',
 })
 export class UniversityService {
-  private apiUrl = 'http://localhost:8888/api/universities'; // Replace with your backend URL
+  private apiUrl = 'http://localhost:8888/api/universities';
 
   constructor(private http: HttpClient) {}
 

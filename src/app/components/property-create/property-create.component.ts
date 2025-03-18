@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PropertyService } from '../../core/services/property.service';
-import { PropertyRequest, ImageRequest, AmenityPropertyRequest } from '../../models/property.model';
+import { PropertyRequest } from '../../models/property.model';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../shared/navbar/navbar.component";
 import { Navbar2Component } from "../../shared/navbar2/navbar2.component";
-import { HttpClient } from '@angular/common/http';
+import { DataService } from '../../core/services/data.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-property-create',
@@ -28,7 +29,8 @@ export class PropertyCreateComponent implements OnInit {
     private propertyService: PropertyService,
     private dataService: DataService,
     private authService: AuthService
-  ) {
+  )
+   {
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
       address: ['', Validators.required],
@@ -45,6 +47,7 @@ export class PropertyCreateComponent implements OnInit {
 
   ngOnInit(): void {
     const user = this.authService.getCurrentUser();
+    console.log('Current User:', user); 
     if (user) {
       this.propertyForm.patchValue({ landlordId: user.id });
     }
@@ -75,51 +78,38 @@ export class PropertyCreateComponent implements OnInit {
     );
   }
 
-  // Add a university to the selected list
   addUniversity(university: any): void {
     if (!this.selectedUniversities.includes(university)) {
       this.selectedUniversities.push(university);
+      console.log('Selected Universities:', this.selectedUniversities);
       this.propertyForm.patchValue({
         universityIds: this.selectedUniversities.map(u => u.id)
       });
     }
   }
-
-  // Remove a university from the selected list
-  removeUniversity(university: any): void {
-    this.selectedUniversities = this.selectedUniversities.filter(u => u.id !== university.id);
-    this.propertyForm.patchValue({
-      universityIds: this.selectedUniversities.map(u => u.id)
-    });
-  }
-
-  // Add an amenity to the selected list
+  
   addAmenity(amenity: any): void {
     if (!this.selectedAmenities.includes(amenity)) {
       this.selectedAmenities.push(amenity);
+      console.log('Selected Amenities:', this.selectedAmenities);
       this.propertyForm.patchValue({
         amenityProperties: this.selectedAmenities.map(a => a.id)
       });
     }
   }
 
-  // Remove an amenity from the selected list
-  removeAmenity(amenity: any): void {
-    this.selectedAmenities = this.selectedAmenities.filter(a => a.id !== amenity.id);
-    this.propertyForm.patchValue({
-      amenityProperties: this.selectedAmenities.map(a => a.id)
-    });
-  }
-
   onFileChange(event: any): void {
     const files = event.target.files;
     if (files) {
       this.selectedFiles = Array.from(files);
+      console.log('Selected Files:', this.selectedFiles);
       this.propertyForm.patchValue({ images: this.selectedFiles });
     }
   }
 
   onSubmit(): void {
+    console.log('Form Value:', this.propertyForm.value);
+    console.log('Form Valid:', this.propertyForm.valid);
     if (this.propertyForm.valid) {
       const propertyRequest: PropertyRequest = this.propertyForm.value;
       this.propertyService.createProperty(propertyRequest).subscribe(

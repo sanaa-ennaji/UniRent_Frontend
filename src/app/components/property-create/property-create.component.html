@@ -67,118 +67,105 @@
         />
       </div>
 
-      <!-- Landlord ID -->
+      <!-- Images (File Input) -->
       <div>
-        <label for="landlordId" class="block text-sm font-medium text-gray-700">Landlord ID</label>
-        <input
-          id="landlordId"
-          type="number"
-          formControlName="landlordId"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-  
-    <!-- Images (File Input) -->
-<div>
-    <label for="images" class="block text-sm font-medium text-gray-700">Images</label>
-    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-      <div class="space-y-1 text-center">
-        <svg
-          class="mx-auto h-12 w-12 text-gray-400"
-          stroke="currentColor"
-          fill="none"
-          viewBox="0 0 48 48"
-          aria-hidden="true"
-        >
-          <path
-            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        <div class="flex text-sm text-gray-600">
-          <label
-            for="images"
-            class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
-          >
-            <span>Upload images</span>
-            <input
-              id="images"
-              type="file"
-              multiple
-              (change)="onFileChange($event)"
-              class="sr-only"
-            />
-          </label>
-          <p class="pl-1">or drag and drop</p>
+        <label for="images" class="block text-sm font-medium text-gray-700">Images</label>
+        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+          <div class="space-y-1 text-center">
+            <svg
+              class="mx-auto h-12 w-12 text-gray-400"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 48 48"
+              aria-hidden="true"
+            >
+              <path
+                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div class="flex text-sm text-gray-600">
+              <label
+                for="images"
+                class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+              >
+                <span>Upload images</span>
+                <input
+                  id="images"
+                  type="file"
+                  multiple
+                  (change)="onFileChange($event)"
+                  class="sr-only"
+                />
+              </label>
+              <p class="pl-1">or drag and drop</p>
+            </div>
+            <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+          </div>
         </div>
-        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+        <!-- Display selected file names -->
+        <div *ngIf="selectedFiles.length > 0" class="mt-2">
+          <h4 class="text-sm font-medium text-gray-700">Selected Files:</h4>
+          <ul class="list-disc list-inside">
+            <li *ngFor="let file of selectedFiles" class="text-sm text-gray-600">{{ file.name }}</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <!-- Display selected file names -->
-    <div *ngIf="selectedFiles.length > 0" class="mt-2">
-      <h4 class="text-sm font-medium text-gray-700">Selected Files:</h4>
-      <ul class="list-disc list-inside">
-        <li *ngFor="let file of selectedFiles" class="text-sm text-gray-600">{{ file.name }}</li>
-      </ul>
-    </div>
-  </div>
 
       <!-- University IDs (Multi-Select Dropdown) -->
-<div>
-    <label for="universityIds" class="block text-sm font-medium text-gray-700">
-      Select Universities
-    </label>
-    <div class="relative mt-1">
-      <select
-        id="universityIds"
-        formControlName="universityIds"
-        multiple
-        class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      >
-        <option
-          *ngFor="let university of universities"
-          [value]="university.id"
-          class="px-3 py-2 hover:bg-blue-100"
-        >
-          {{ university.name }}
-        </option>
-      </select>
-    </div>
-  </div>
-  
-  <!-- Amenity Properties (Multi-Select Dropdown) -->
-  <div>
-    <label for="amenityProperties" class="block text-sm font-medium text-gray-700">
-      Select Amenities
-    </label>
-    <div class="relative mt-1">
-      <select
-        id="amenityProperties"
-        formControlName="amenityProperties"
-        multiple
-        class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      >
-        <option
-          *ngFor="let amenity of amenities"
-          [value]="amenity.id"
-          class="px-3 py-2 hover:bg-blue-100"
-        >
-          {{ amenity.name }}
-        </option>
-      </select>
-    </div>
-  </div>
-  
+      <div>
+        <label for="universityIds" class="block text-sm font-medium text-gray-700">
+          Select Universities
+        </label>
+        <div class="relative mt-1">
+          <select
+            id="universityIds"
+            formControlName="universityIds"
+            multiple
+            class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          >
+            <option
+              *ngFor="let university of universities"
+              [value]="university.id"
+              class="px-3 py-2 hover:bg-blue-100"
+            >
+              {{ university.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Amenity Properties (Multi-Select Dropdown) -->
+      <div>
+        <label for="amenityProperties" class="block text-sm font-medium text-gray-700">
+          Select Amenities
+        </label>
+        <div class="relative mt-1">
+          <select
+            id="amenityProperties"
+            formControlName="amenityProperties"
+            multiple
+            class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          >
+            <option
+              *ngFor="let amenity of amenities"
+              [value]="amenity.id"
+              class="px-3 py-2 hover:bg-blue-100"
+            >
+              {{ amenity.name }}
+            </option>
+          </select>
+        </div>
+      </div>
 
       <!-- Submit Button -->
       <div class="text-center">
         <button
           type="submit"
-          [disabled]="propertyForm.invalid"
-          class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
+   
+          class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 "
         >
           Create Property
         </button>

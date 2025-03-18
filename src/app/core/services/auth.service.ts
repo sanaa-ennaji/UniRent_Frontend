@@ -4,12 +4,8 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoginRequestDTO } from '../../models/login-request.model';
+import { AuthenticationResponse } from '../../models/authResponse.model';
 
-export interface AuthenticationResponse {
-  jwt: string;
-  email: string;
-  roleName: string;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +19,7 @@ export class AuthService {
     return this.http.post<AuthenticationResponse>(this.apiUrl, credentials).pipe(
       tap((response) => {
         localStorage.setItem('jwt', response.jwt);
+        localStorage.setItem('userId', response.id.toString());
         localStorage.setItem('roleName', response.roleName);
       })
     );
@@ -45,4 +42,19 @@ export class AuthService {
   getRoleName(): string | null {
     return localStorage.getItem('roleName');
   }
+ 
+  getCurrentUser(): any {
+    const userId = localStorage.getItem('userId');
+    const roleName = localStorage.getItem('roleName');
+  
+    if (userId && roleName) {
+      return {
+        id: +userId, 
+        roleName: roleName
+      };
+    }
+    return null;
+  }
+
+  
 }
