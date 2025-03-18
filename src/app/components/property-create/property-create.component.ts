@@ -95,7 +95,10 @@ export class PropertyCreateComponent implements OnInit {
       this.selectedAmenities.push(amenity);
       console.log('Selected Amenities:', this.selectedAmenities);
       this.propertyForm.patchValue({
-        amenityProperties: this.selectedAmenities.map(a => a.id)
+        amenityProperties: this.selectedAmenities.map(a => ({
+          quantity: 1,
+          amenityId: a.id
+        }))
       });
     }
   }
@@ -106,7 +109,6 @@ export class PropertyCreateComponent implements OnInit {
       this.selectedFiles = Array.from(files);
     }
   }
-
   onSubmit(): void {
     if (this.propertyForm.valid) {
       const uploadObservables = this.selectedFiles.map((file) =>
@@ -115,12 +117,18 @@ export class PropertyCreateComponent implements OnInit {
 
       Promise.all(uploadObservables.map((obs) => obs.toPromise()))
         .then((responses) => {
-
           const imageUrls = responses.map((res) => ({ imageUrl: res.secure_url }));
 
           this.propertyForm.patchValue({ images: imageUrls });
 
-          const propertyRequest: PropertyRequest = this.propertyForm.value;
+          const propertyRequest: PropertyRequest = {
+            ...this.propertyForm.value,
+            amenityProperties: this.selectedAmenities.map((a) => ({
+              quantity: 1, 
+              amenityId: a.id,
+            })),
+          };
+
           this.propertyService.createProperty(propertyRequest).subscribe(
             (response) => {
               console.log('Property created successfully:', response);

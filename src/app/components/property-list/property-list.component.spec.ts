@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PropertyCreateComponent } from './property-create.component';
 
-describe('PropertyCreateComponent', () => {
-  let component: PropertyCreateComponent;
-  let fixture: ComponentFixture<PropertyCreateComponent>;
+import { PropertyListComponent } from './property-list.component';
+
+describe('PropertyListComponent', () => {
+  let component: PropertyListComponent;
+  let fixture: ComponentFixture<PropertyListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PropertyCreateComponent]
+      imports: [PropertyListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PropertyCreateComponent);
+    fixture = TestBed.createComponent(PropertyListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
