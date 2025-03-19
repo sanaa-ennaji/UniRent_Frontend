@@ -8,17 +8,13 @@ export interface PropertyRequest {
     landlordId: number;
     universityIds: number[];
     images: ImageRequest[];
-    amenityProperties: AmenityPropertyRequest[];
+    amenityIds: number[];
   }
 
   export interface ImageRequest {
     imageUrl: string;
   }
   
-  export interface AmenityPropertyRequest {
-    quantity: number;
-    amenityId: number;
-  }
 export interface PropertyResponse {
     id: number;
     title: string;
@@ -30,5 +26,6 @@ export interface PropertyResponse {
     landlordId: number;
     universityIds: number[];
     images: ImageRequest[];
-    amenityProperties: AmenityPropertyRequest[];
+   
+   
   }

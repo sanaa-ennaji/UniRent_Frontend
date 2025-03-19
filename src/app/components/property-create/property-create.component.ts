@@ -106,9 +106,10 @@ export class PropertyCreateComponent implements OnInit {
   
     console.log('Selected Amenities:', this.selectedAmenities);
   
+
     this.propertyForm.patchValue({
       amenityProperties: this.selectedAmenities.map(a => ({
-        quantity: 1, 
+        quantity: 1, // Default quantity
         amenityId: a.id
       }))
     });
@@ -125,10 +126,12 @@ export class PropertyCreateComponent implements OnInit {
   
   onSubmit(): void {
     if (this.propertyForm.valid) {
+   
+      this.addAmenity();
+  
       console.log('Form Value:', this.propertyForm.value);
       console.log('Selected Amenities:', this.selectedAmenities);
   
-
       if (!this.selectedAmenities || this.selectedAmenities.length === 0) {
         console.error('No amenities selected.');
         alert('Please select at least one amenity.');
@@ -146,7 +149,7 @@ export class PropertyCreateComponent implements OnInit {
   
           this.propertyForm.patchValue({ images: imageUrls });
   
-  
+          // Prepare the property request
           const propertyRequest: PropertyRequest = {
             ...this.propertyForm.value,
             amenityProperties: this.selectedAmenities.map((a) => ({
@@ -157,7 +160,7 @@ export class PropertyCreateComponent implements OnInit {
   
           console.log('Property Request:', propertyRequest);
   
-       
+         
           this.propertyService.createProperty(propertyRequest).subscribe(
             (response) => {
               console.log('Property created successfully:', response);
