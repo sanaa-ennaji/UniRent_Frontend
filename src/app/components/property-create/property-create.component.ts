@@ -89,19 +89,32 @@ export class PropertyCreateComponent implements OnInit {
       });
     }
   }
+ 
+  addAmenity(): void {
+    const amenitySelect = document.getElementById('amenityProperties') as HTMLSelectElement;
+    const selectedOptions = Array.from(amenitySelect.selectedOptions);
   
-  addAmenity(amenity: any): void {
-    if (!this.selectedAmenities.includes(amenity)) {
-      this.selectedAmenities.push(amenity);
-      console.log('Selected Amenities:', this.selectedAmenities);
-      this.propertyForm.patchValue({
-        amenityProperties: this.selectedAmenities.map(a => ({
-          quantity: 1,
-          amenityId: a.id
-        }))
-      });
-    }
+    this.selectedAmenities = selectedOptions.map((option: HTMLOptionElement) => {
+      const amenityId = +option.value; 
+      const amenity = this.amenities.find(a => a.id === amenityId);
+      if (!amenity) {
+        console.error('Amenity not found for ID:', amenityId);
+        return null;
+      }
+      return amenity;
+    }).filter(a => a !== null); 
+  
+    console.log('Selected Amenities:', this.selectedAmenities);
+  
+    this.propertyForm.patchValue({
+      amenityProperties: this.selectedAmenities.map(a => ({
+        quantity: 1, 
+        amenityId: a.id
+      }))
+    });
   }
+
+
 
   onFileChange(event: any): void {
     const files = event.target.files;
@@ -109,26 +122,42 @@ export class PropertyCreateComponent implements OnInit {
       this.selectedFiles = Array.from(files);
     }
   }
+  
   onSubmit(): void {
     if (this.propertyForm.valid) {
+      console.log('Form Value:', this.propertyForm.value);
+      console.log('Selected Amenities:', this.selectedAmenities);
+  
+
+      if (!this.selectedAmenities || this.selectedAmenities.length === 0) {
+        console.error('No amenities selected.');
+        alert('Please select at least one amenity.');
+        return;
+      }
+  
       const uploadObservables = this.selectedFiles.map((file) =>
         this.cloudinaryService.uploadImage(file)
       );
-
+  
       Promise.all(uploadObservables.map((obs) => obs.toPromise()))
         .then((responses) => {
           const imageUrls = responses.map((res) => ({ imageUrl: res.secure_url }));
-
+          console.log('Image URLs:', imageUrls);
+  
           this.propertyForm.patchValue({ images: imageUrls });
-
+  
+  
           const propertyRequest: PropertyRequest = {
             ...this.propertyForm.value,
             amenityProperties: this.selectedAmenities.map((a) => ({
-              quantity: 1, 
-              amenityId: a.id,
-            })),
+              quantity: 1,
+              amenityId: a.id
+            }))
           };
-
+  
+          console.log('Property Request:', propertyRequest);
+  
+       
           this.propertyService.createProperty(propertyRequest).subscribe(
             (response) => {
               console.log('Property created successfully:', response);
