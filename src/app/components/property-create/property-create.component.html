@@ -138,26 +138,26 @@
       </div>
 
 
-<!-- Amenity Properties -->
+<!-- Amenity -->
 <div>
   <label for="amenityProperties" class="block text-sm font-medium text-gray-700">
     Select Amenities
   </label>
   <div class="relative mt-1">
     <select
-      id="amenityProperties"
-      formControlName="amenityProperties"
-      multiple
-      class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+    id="amenityProperties"
+    formControlName="amenityIds"
+    multiple
+    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+  >
+    <option
+      *ngFor="let amenity of amenities"
+      [value]="amenity.id" 
+      class="px-3 py-2 hover:bg-blue-100"
     >
-      <option
-        *ngFor="let amenity of amenities"
-        [value]="amenity.id"
-        class="px-3 py-2 hover:bg-blue-100"
-      >
-        {{ amenity.name }}
-      </option>
-    </select>
+      {{ amenity.name }}
+    </option>
+  </select>
   </div>
 </div>
 

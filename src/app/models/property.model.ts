@@ -14,6 +14,10 @@ export interface PropertyRequest {
   export interface ImageRequest {
     imageUrl: string;
   }
+  export interface AmenityResponse {
+    id: number;
+    name: string;
+  }
   
 export interface PropertyResponse {
     id: number;
@@ -26,6 +30,7 @@ export interface PropertyResponse {
     landlordId: number;
     universityIds: number[];
     images: ImageRequest[];
+    amenities: AmenityResponse[];
    
    
   }

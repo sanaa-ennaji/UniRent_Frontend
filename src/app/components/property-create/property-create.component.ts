@@ -43,7 +43,7 @@ export class PropertyCreateComponent implements OnInit {
       landlordId: [null, Validators.required],
       universityIds: [[], Validators.required],
       images: [[]],
-      amenityProperties: [[], Validators.required]
+      amenityIds: [[], Validators.required] 
     });
   }
 
@@ -90,12 +90,18 @@ export class PropertyCreateComponent implements OnInit {
     }
   }
  
+ 
   addAmenity(): void {
     const amenitySelect = document.getElementById('amenityProperties') as HTMLSelectElement;
     const selectedOptions = Array.from(amenitySelect.selectedOptions);
   
     this.selectedAmenities = selectedOptions.map((option: HTMLOptionElement) => {
-      const amenityId = +option.value; 
+      const optionValue = option.value.split(':')[0].trim(); 
+      console.log('Parsed Option Value:', optionValue); 
+  
+      const amenityId = +optionValue; 
+      console.log('Parsed Amenity ID:', amenityId); 
+  
       const amenity = this.amenities.find(a => a.id === amenityId);
       if (!amenity) {
         console.error('Amenity not found for ID:', amenityId);
@@ -105,16 +111,11 @@ export class PropertyCreateComponent implements OnInit {
     }).filter(a => a !== null); 
   
     console.log('Selected Amenities:', this.selectedAmenities);
-  
-
+ 
     this.propertyForm.patchValue({
-      amenityProperties: this.selectedAmenities.map(a => ({
-        quantity: 1, // Default quantity
-        amenityId: a.id
-      }))
+      amenityIds: this.selectedAmenities.map(a => a.id)
     });
   }
-
 
 
   onFileChange(event: any): void {
@@ -123,10 +124,10 @@ export class PropertyCreateComponent implements OnInit {
       this.selectedFiles = Array.from(files);
     }
   }
+ 
   
   onSubmit(): void {
     if (this.propertyForm.valid) {
-   
       this.addAmenity();
   
       console.log('Form Value:', this.propertyForm.value);
@@ -152,15 +153,12 @@ export class PropertyCreateComponent implements OnInit {
           // Prepare the property request
           const propertyRequest: PropertyRequest = {
             ...this.propertyForm.value,
-            amenityProperties: this.selectedAmenities.map((a) => ({
-              quantity: 1,
-              amenityId: a.id
-            }))
+            amenityIds: this.selectedAmenities.map(a => a.id) // Send amenity IDs
           };
   
           console.log('Property Request:', propertyRequest);
   
-         
+          // Submit the form
           this.propertyService.createProperty(propertyRequest).subscribe(
             (response) => {
               console.log('Property created successfully:', response);
