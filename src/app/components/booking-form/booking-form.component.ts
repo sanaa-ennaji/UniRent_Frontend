@@ -44,14 +44,14 @@ export class BookingFormComponent implements OnInit {
         this.router.navigate(['/login']);
         return;
       }
-
+  
       const bookingRequest: BookingRequestDTO = {
         ...this.bookingForm.value,
         propertyId: this.propertyId,
         studentId: user.id,
-        status: 'Pending', // Default status
+        status: 'PENDING', 
       };
-
+  
       this.bookingService.createBooking(bookingRequest).subscribe(
         (response) => {
           console.log('Booking created successfully:', response);
