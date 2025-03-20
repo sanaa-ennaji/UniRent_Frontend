@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { BookingRequestDTO } from '../../models/booking.model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BookingService {
+  private apiUrl = 'http://localhost:8888/api/v1/booking';
+
+  constructor(private http: HttpClient) {}
+
+  createBooking(bookingRequest: BookingRequestDTO): Observable<any> {
+    return this.http.post(this.apiUrl, bookingRequest);
+  }
+}
