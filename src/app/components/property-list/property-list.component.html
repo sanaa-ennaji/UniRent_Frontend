@@ -22,7 +22,7 @@
         <app-navbar3></app-navbar3>
         <!-- component -->
         <div class="flex ">
-          <div *ngIf="properties.length > 0; else noProperties" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  mt-20 mx-4 w-2/3 ">
+          <div *ngIf="properties.length > 0; else noProperties" (click)="navigateToDetails(property.id)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  mt-20 mx-4 w-2/3 ">
             <div *ngFor="let property of properties">
               <div >
                 <div class="relative flex flex-col rounded-xl bg-clip-border text-gray-700 ">

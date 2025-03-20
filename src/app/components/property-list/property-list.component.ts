@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Navbar3Component } from '../../shared/navbar3/navbar3.component';
 import { MapComponent } from "../map/map.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-list',
@@ -17,11 +18,20 @@ import { MapComponent } from "../map/map.component";
 export class PropertyListComponent implements OnInit {
   properties: PropertyResponse[] = [];
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService,
+    private router: Router
+  ) {}
+
+
 
   ngOnInit(): void {
     this.fetchProperties();
   }
+
+  navigateToDetails(propertyId: number) {
+    this.router.navigate(['/property/details', propertyId]);
+  }
+
 
   fetchProperties(): void {
     this.propertyService.getProperties().subscribe(
@@ -35,3 +45,5 @@ export class PropertyListComponent implements OnInit {
     );
   }
 }
+
+

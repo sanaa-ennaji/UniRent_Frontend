@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { Navbar2Component } from './shared/navbar2/navbar2.component';
 import { PropertyCreateComponent } from './components/property-create/property-create.component';
 import { PropertyListComponent } from './components/property-list/property-list.component';
+import { PropertyDetailsComponent } from './property-details/property-details.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -12,6 +13,7 @@ export const routes: Routes = [
     {path: 'register',component: RegisterComponent },
     {path: 'property/create' , component: PropertyCreateComponent},
     {path: 'sidebar' , component : Navbar2Component },
-    {path: 'propertyList', component: PropertyListComponent}
+    {path: 'propertyList', component: PropertyListComponent},
+    {path: 'property/details', component: PropertyDetailsComponent}
 
 ];
