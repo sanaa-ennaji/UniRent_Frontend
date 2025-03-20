@@ -57,3 +57,14 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+1. Use Test Card Numbers
+Stripe provides test card numbers to simulate payments in Test Mode. Here are some examples:
+
+### Test Card Numbers
+Card Number       	Description
+4242 4242 4242 4242	Visa (successful payment)
+4000 0027 6000 3184	Requires authentication
+4000 0000 0000 0002	Payment fails
+future expiration date (e.g., 12/34) and any CVC (e.g., 123).
