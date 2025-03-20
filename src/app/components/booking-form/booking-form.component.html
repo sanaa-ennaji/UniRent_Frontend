@@ -1,0 +1,94 @@
+<div class="min-h-screen bg-gray-100 py-8">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+      <h1 class="text-2xl font-bold mb-6 text-center">Book Property</h1>
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Start Date -->
+        <div>
+          <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+          <input
+            id="startDate"
+            type="date"
+            formControlName="startDate"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+  
+        <!-- End Date -->
+        <div>
+          <label for="endDate" class="block text-sm font-medium text-gray-700">End Date</label>
+          <input
+            id="endDate"
+            type="date"
+            formControlName="endDate"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+  
+        <!-- First Name -->
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+          <input
+            id="firstName"
+            formControlName="firstName"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+  
+        <!-- Last Name -->
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+          <input
+            id="lastName"
+            formControlName="lastName"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+  
+        <!-- Phone Number -->
+        <div>
+          <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+          <input
+            id="phoneNumber"
+            formControlName="phoneNumber"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+  
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+  
+        <!-- Gender -->
+        <div>
+          <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+          <select
+            id="gender"
+            formControlName="gender"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button
+            type="submit"
+            [disabled]="bookingForm.invalid"
+            class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            Reserve Now
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '../../core/services/property.service';
 import { PropertyResponse } from '../../models/property.model';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-property-details',
   standalone: true,
-  imports:[CommonModule ],
+  imports:[CommonModule , NavbarComponent ],
   templateUrl: './property-details.component.html',
   styleUrls: ['./property-details.component.css']
 })
