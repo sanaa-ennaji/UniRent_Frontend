@@ -28,8 +28,8 @@ export class PropertyListComponent implements OnInit {
     this.fetchProperties();
   }
 
-  navigateToDetails(propertyId: number) {
-    this.router.navigate(['/property/details', propertyId]);
+  navigateToPropertyDetails(propertyId: number) {
+    this.router.navigate(['/properties', propertyId]);
   }
 
 

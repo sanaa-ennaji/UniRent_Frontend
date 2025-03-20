@@ -19,7 +19,9 @@ export class PropertyService {
     return this.http.post(this.apiUrl, propertyRequest);
   }
 
-  
+  getPropertyById(id: number): Observable<PropertyResponse> {
+    return this.http.get<PropertyResponse>(`${this.apiUrl}/${id}`);
+  }
   
 
 }
