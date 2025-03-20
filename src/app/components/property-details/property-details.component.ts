@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router  } from '@angular/router';
 import { PropertyService } from '../../core/services/property.service';
 import { PropertyResponse } from '../../models/property.model';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-
 @Component({
   selector: 'app-property-details',
   standalone: true,
@@ -17,7 +16,8 @@ export class PropertyDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private propertyService: PropertyService
+    private propertyService: PropertyService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,5 +25,8 @@ export class PropertyDetailsComponent implements OnInit {
     this.propertyService.getPropertyById(id).subscribe((data) => {
       this.property = data;
     });
+  }
+  navigateToBookingForm(propertyId: number): void {
+    this.router.navigate(['/booking', propertyId]);
   }
 }
