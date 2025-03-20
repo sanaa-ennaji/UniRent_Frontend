@@ -22,10 +22,11 @@ export class PropertyListComponent implements OnInit {
     private router: Router
   ) {}
 
-
-
   ngOnInit(): void {
-    this.fetchProperties();
+    this.propertyService.getProperties().subscribe((data) => {
+      this.properties = data;
+      console.log('Properties:', this.properties);
+    });
   }
 
   navigateToPropertyDetails(propertyId: number) {

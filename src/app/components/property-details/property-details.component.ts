@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '../../core/services/property.service';
 import { PropertyResponse } from '../../models/property.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-property-details',
+  standalone: true,
+  imports:[CommonModule ],
   templateUrl: './property-details.component.html',
   styleUrls: ['./property-details.component.css']
 })
