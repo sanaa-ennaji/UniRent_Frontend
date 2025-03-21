@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingService } from '../../core/services/booking.service';
 import { AuthService } from '../../core/services/auth.service';
 import { BookingRequestDTO } from '../../models/booking.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-booking-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './booking-form.component.html',
   styleUrls: ['./booking-form.component.css'],
 })
@@ -28,7 +31,7 @@ export class BookingFormComponent implements OnInit {
       lastName: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      gender: ['', Validators.required],
+      gender: ['Male', Validators.required]
     });
     this.propertyId = +this.route.snapshot.paramMap.get('id')!;
   }

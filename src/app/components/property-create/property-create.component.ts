@@ -150,10 +150,10 @@ export class PropertyCreateComponent implements OnInit {
   
           this.propertyForm.patchValue({ images: imageUrls });
   
-          // Prepare the property request
+          
           const propertyRequest: PropertyRequest = {
             ...this.propertyForm.value,
-            amenityIds: this.selectedAmenities.map(a => a.id) // Send amenity IDs
+            amenityIds: this.selectedAmenities.map(a => a.id) 
           };
   
           console.log('Property Request:', propertyRequest);

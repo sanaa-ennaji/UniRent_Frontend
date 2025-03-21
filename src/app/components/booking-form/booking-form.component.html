@@ -65,19 +65,35 @@
           />
         </div>
   
-        <!-- Gender -->
-        <div>
-          <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
-          <select
-            id="gender"
-            formControlName="gender"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
+         <!-- Gender -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Gender</label>
+        <div class="mt-2 space-y-2">
+          <!-- Male Radio Button -->
+          <div class="flex items-center">
+            <input
+              id="male"
+              type="radio"
+              formControlName="gender"
+              value="Male"
+              class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+            />
+            <label for="male" class="ml-2 block text-sm text-gray-700">Male</label>
+          </div>
+
+          <!-- Female Radio Button -->
+          <div class="flex items-center">
+            <input
+              id="female"
+              type="radio"
+              formControlName="gender"
+              value="Female"
+              class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+            />
+            <label for="female" class="ml-2 block text-sm text-gray-700">Female</label>
+          </div>
         </div>
+      </div>
   
         <!-- Submit Button -->
         <div class="text-center">
