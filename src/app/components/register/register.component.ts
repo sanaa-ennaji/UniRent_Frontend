@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
 import { UserRequestDTO } from '../../models/user-request.model';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { faUserGraduate, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
