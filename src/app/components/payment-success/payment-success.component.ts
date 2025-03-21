@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../core/services/booking.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-payment-success',
+  imports: [CommonModule],
   templateUrl: './payment-success.component.html',
   styleUrls: ['./payment-success.component.css'],
 })
