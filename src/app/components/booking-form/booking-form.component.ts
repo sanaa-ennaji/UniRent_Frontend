@@ -12,7 +12,7 @@ import { BookingRequestDTO } from '../../models/booking.model';
 })
 export class BookingFormComponent implements OnInit {
   bookingForm: FormGroup;
-  propertyId: number;
+  propertyId: number; 
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +30,7 @@ export class BookingFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
     });
+    this.propertyId = +this.route.snapshot.paramMap.get('id')!;
   }
 
   ngOnInit(): void {
