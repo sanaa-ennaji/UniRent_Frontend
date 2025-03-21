@@ -7,6 +7,7 @@ import { PropertyCreateComponent } from './components/property-create/property-c
 import { PropertyListComponent } from './components/property-list/property-list.component';
 import { PropertyDetailsComponent } from './components/property-details/property-details.component';
 import { BookingFormComponent } from './components/booking-form/booking-form.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -17,5 +18,6 @@ export const routes: Routes = [
     {path: 'propertyList', component: PropertyListComponent},
     { path: 'properties/:id', component: PropertyDetailsComponent },
     { path: 'booking/:id', component: BookingFormComponent },
+    { path: 'payment-success', component: PaymentSuccessComponent },
 
 ];

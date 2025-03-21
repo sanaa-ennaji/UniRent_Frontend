@@ -1,8 +1,8 @@
 
 import { Injectable } from '@angular/core';
-import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +14,32 @@ export class PaymentService {
     this.stripePromise = loadStripe(environment.stripePublishableKey);
   }
 
-  async redirectToCheckout(priceId: string, bookingId: number): Promise<void> {
+  async createCheckoutSession(amount: number, currency: string, bookingId: number): Promise<string> {
+    try {
+      const response = await this.http
+        .post<{ sessionId: string }>('http://localhost:8888/api/payments/create-checkout-session', {
+          amount,
+          currency,
+          bookingId,
+        })
+        .toPromise();
+  
+      console.log('Payment Session Response:', response);
+      return response!.sessionId;
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      throw error;
+    }
+  }
+
+  async redirectToCheckout(sessionId: string): Promise<void> {
     const stripe = await this.stripePromise;
     if (!stripe) {
       throw new Error('Stripe failed to initialize.');
     }
 
     const { error } = await stripe.redirectToCheckout({
-      lineItems: [{ price: priceId, quantity: 1 }],
-      mode: 'payment',
-      successUrl: `${window.location.origin}/payment-success?bookingId=${bookingId}`,
-      cancelUrl: `${window.location.origin}/payment-cancel`,
+      sessionId, 
     });
 
     if (error) {
