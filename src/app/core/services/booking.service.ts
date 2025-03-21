@@ -14,4 +14,9 @@ export class BookingService {
   createBooking(bookingRequest: BookingRequestDTO): Observable<any> {
     return this.http.post(this.apiUrl, bookingRequest);
   }
+  updateBookingStatus(bookingId: number, status: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${bookingId}/status`, null, {
+      params: { status },
+    });
+  }
 }
