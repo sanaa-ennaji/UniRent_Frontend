@@ -115,7 +115,10 @@ export class PropertyCreateComponent implements OnInit {
   onFileChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files) {
-      this.selectedFiles = Array.from(inputElement.files);
+      this.selectedFiles = [
+        ...this.selectedFiles,
+        ...Array.from(inputElement.files)
+      ];
     }
   }
 
