@@ -2,8 +2,8 @@
 <app-navbar2></app-navbar2>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <div class="min-h-screen bg-gray-100 py-8">
-  <div class="flex max-w-7xl mx-auto gap-8">
-    <div class="w-1/2 bg-white p-8 rounded-lg shadow-lg h-[140vh]">
+  <div class="flex max-w-[95%] mx-auto gap-8">
+    <div class="w-[55%] bg-white p-8 rounded-lg shadow-lg h-[130vh]">
       <div class="flex items-center mb-10">
         <!-- Font Awesome Icon -->
         <i class="fas fa-home text-blue-600 text-2xl mr-3"></i>
@@ -73,6 +73,45 @@
               <option value="Townhouse">Townhouse</option>
             </select>
           </div>
+
+
+        <!-- Amenities (Checkboxes) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Select Amenities</label
+          >
+          <div class="mt-2 space-y-2">
+            <div *ngFor="let amenity of amenities" class="flex items-center">
+              <input
+                type="checkbox"
+                [id]="'amenity-' + amenity.id"
+                [value]="amenity.id"
+                (change)="onAmenityChange($event, amenity)"
+                class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <label
+                [for]="'amenity-' + amenity.id"
+                class="ml-2 text-sm text-gray-700"
+              >
+                {{ amenity.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+              <!-- Available -->
+              <div class="flex items-center">
+                <input
+                  id="available"
+                  type="checkbox"
+                  formControlName="available"
+                  class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+                <label for="available" class="ml-2 block text-sm text-gray-700"
+                  >Available</label
+                >
+              </div>
+
         </div>
 
         <!-- Description (Full width) -->
@@ -128,42 +167,7 @@
             </div>
           </div>
         </div>
-        <!-- Available -->
-        <div class="flex items-center">
-          <input
-            id="available"
-            type="checkbox"
-            formControlName="available"
-            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
-          <label for="available" class="ml-2 block text-sm text-gray-700"
-            >Available</label
-          >
-        </div>
-
-        <!-- Amenities (Checkboxes) -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700"
-            >Select Amenities</label
-          >
-          <div class="mt-2 space-y-2">
-            <div *ngFor="let amenity of amenities" class="flex items-center">
-              <input
-                type="checkbox"
-                [id]="'amenity-' + amenity.id"
-                [value]="amenity.id"
-                (change)="onAmenityChange($event, amenity)"
-                class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <label
-                [for]="'amenity-' + amenity.id"
-                class="ml-2 text-sm text-gray-700"
-              >
-                {{ amenity.name }}
-              </label>
-            </div>
-          </div>
-        </div>
+       
 
         <!-- Images -->
         <div>
@@ -222,7 +226,7 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="text-center">
+        <div class="right-2">
           <button
             type="submit"
             class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
