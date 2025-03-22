@@ -122,6 +122,12 @@ export class PropertyCreateComponent implements OnInit {
     }
   }
 
+  removeFile(index: number): void {
+    this.selectedFiles = [
+      ...this.selectedFiles.slice(0, index),
+      ...this.selectedFiles.slice(index + 1)
+    ];
+  }
   onSubmit(): void {
     if (this.propertyForm.valid) {
       const uploadObservables = this.selectedFiles.map((file) =>
