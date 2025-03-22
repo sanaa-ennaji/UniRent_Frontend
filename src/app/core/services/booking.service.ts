@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BookingRequestDTO } from '../../models/booking.model';
+import { BookingRequestDTO, BookingResponseDTO } from '../../models/booking.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +18,9 @@ export class BookingService {
     return this.http.put(`${this.apiUrl}/${bookingId}/status`, null, {
       params: { status },
     });
+  }
+
+  getBookingsByUserId(userId: number): Observable<BookingResponseDTO[]> {
+    return this.http.get<BookingResponseDTO[]>(`${this.apiUrl}/user/${userId}`);
   }
 }
