@@ -1,12 +1,11 @@
 <app-navbar></app-navbar>
 <app-navbar2></app-navbar2>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<div class="min-h-screen bg-gray-50 py-10">
+<div class="min-h-screen bg-gray-50 py-10 ">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row gap-8">
-      <!-- Form Section -->
       <div class="md:w-3/5 bg-white rounded-xl shadow-md overflow-hidden">
-        <div class="bg-gradient-to-r from-blue-600 to-blue-700 py-6 px-8">
+        <div class="bg-gradient-to-r from-blue-500 to-blue-600 py-6 px-8">
           <div class="flex items-center">
             <i class="fas fa-home text-white text-2xl mr-3"></i>
             <h1 class="text-2xl font-bold text-white">Publish a new Property</h1>
@@ -17,7 +16,7 @@
           <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="space-y-8">
             <!-- Basic Information Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b pb-2 mb-4">Basic Information</h2>
+              <h2 class="text-lg font-medium text-gray-900 border-b border-gray-300 pb-2 mb-4">Basic Information</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Title -->
                 <div class="col-span-2 md:col-span-1">
@@ -107,7 +106,7 @@
 
             <!-- Description Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b pb-2 mb-4">Property Description</h2>
+              <h2 class="text-lg font-medium text-gray-900 border-b  border-gray-300 pb-2 mb-4">Property Description</h2>
               <label for="description" class="block text-sm font-medium text-gray-700">
                 Description <span class="text-gray-400">(rooms, kitchen, toilet, living room...)</span>
               </label>
@@ -122,7 +121,7 @@
 
             <!-- Location Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b pb-2 mb-4">Location</h2>
+              <h2 class="text-lg font-medium text-gray-900 border-b  border-gray-300 pb-2 mb-4">Location</h2>
               <label for="universityIds" class="block text-sm font-medium text-gray-700">
                 Nearby Universities <span class="text-red-500">*</span>
               </label>
@@ -162,7 +161,7 @@
 
             <!-- Amenities Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b pb-2 mb-4">Amenities</h2>
+              <h2 class="text-lg font-medium text-gray-900 border-b  border-gray-300 pb-2 mb-4">Amenities</h2>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <div *ngFor="let amenity of amenities" class="flex items-center">
                   <input
@@ -261,7 +260,7 @@
       <!-- Properties Display Section -->
       <div class="md:w-2/5">
         <div class="bg-white rounded-xl shadow-md overflow-hidden h-full">
-          <div class="bg-gradient-to-r from-blue-600 to-blue-700 py-6 px-8">
+          <div class="bg-gradient-to-r from-blue-500 to-blue-600 py-6 px-8">
             <h2 class="text-xl font-bold text-white flex items-center">
               <i class="fas fa-list-alt mr-2"></i> Your Properties
             </h2>

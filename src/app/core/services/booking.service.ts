@@ -23,4 +23,8 @@ export class BookingService {
   getAllBookings(): Observable<BookingResponseDTO[]> {
     return this.http.get<BookingResponseDTO[]>(this.apiUrl);
   }
+
+  getConfirmedBookingsByLandlordId(landlordId: number): Observable<BookingResponseDTO[]> {
+    return this.http.get<BookingResponseDTO[]>(`${this.apiUrl}/landlord/${landlordId}`);
+  }
 }

@@ -16,6 +16,7 @@ export interface BookingRequestDTO {
     startDate: string; 
     endDate: string; 
     propertyId: number;
+    propertyTitle: string; 
     status?: string; 
     studentId: number;
     firstName: string;
