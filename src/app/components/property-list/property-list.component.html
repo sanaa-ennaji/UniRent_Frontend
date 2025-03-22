@@ -1,4 +1,3 @@
-
 <app-navbar></app-navbar>
 <app-navbar3></app-navbar3>
 <div class="text-blue-600 mt-6 mx-5 font-bold flex items-center">
@@ -8,44 +7,49 @@
   <span class="mx-2">></span>
   <span>Properties</span>
 </div>
- 
-<div class="flex ">
-  <div *ngIf="properties.length > 0; else noProperties"    class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  mt-3 mx-4 w-2/3 ">
+
+<!-- Main container -->
+<div class="flex">
+  <!-- Properties list -->
+  <div *ngIf="properties.length > 0; else noProperties" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3 mx-4 w-2/3 overflow-y-auto h-screen">
     <div *ngFor="let property of properties" (click)="navigateToPropertyDetails(property.id)" class="cursor-pointer h-[60vh]">
-      <div >
-        <div class="relative flex flex-col rounded-xl bg-clip-border text-gray-700 ">
+      <div>
+        <div class="relative flex flex-col rounded-xl bg-clip-border text-gray-700">
           <div *ngIf="property.imageUrls && property.imageUrls.length > 0"
-               class="relative  mt-4 overflow-hidden text-gray-500 shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
+               class="relative mt-4 overflow-hidden text-gray-500 shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
             <img [src]="property.imageUrls[0]"
-                 alt="ui/ux review check"
-                 class="w-full h-70 object-cover" /> 
+                 alt="Property Image"
+                 class="w-full h-70 object-cover" />
             <div class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60">
             </div>
-        
           </div>
-          <div class="p-6 flex flex-col flex-grow"> 
+          <div class="p-6 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-3">
               <h5 class="block font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900">
                 {{ property.title }}, {{ property.address }}
               </h5>
-          
             </div>
             <p class="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
               ${{ property.price }}
             </p>
             <div class="inline-flex flex-wrap items-center gap-3 mt-8 group">
-             
+              <!-- Your SVG icons here -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- No properties message -->
   <ng-template #noProperties>
     <p class="text-center text-gray-700">No properties found.</p>
   </ng-template>
-<div class="h-1/3"> <app-map></app-map></div>
- 
+
+  <!-- Map -->
+  <div class="w-1/3 h-screen sticky top-0">
+    <app-map></app-map>
+  </div>
 </div>
 
 

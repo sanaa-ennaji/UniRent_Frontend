@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { PropertyRequest, PropertyResponse } from '../../models/property.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PropertyService {
-  private apiUrl = 'http://localhost:8888/api/properties'; 
+  private apiUrl = 'http://localhost:8888/api/properties';
 
   constructor(private http: HttpClient) {}
 
@@ -22,6 +22,12 @@ export class PropertyService {
   getPropertyById(id: number): Observable<PropertyResponse> {
     return this.http.get<PropertyResponse>(`${this.apiUrl}/${id}`);
   }
-  
 
+  updateProperty(id: number, propertyRequest: PropertyRequest): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, propertyRequest);
+  }
+
+  deleteProperty(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }
