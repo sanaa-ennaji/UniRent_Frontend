@@ -1,10 +1,15 @@
 <app-navbar></app-navbar>
 <app-navbar2></app-navbar2>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <div class="min-h-screen bg-gray-100 py-8">
   <div class="flex max-w-7xl mx-auto gap-8">
-    <div class="w-1/2 bg-white p-8 rounded-lg shadow-lg">
-      <h1 class="text-2xl font-bold mb-6 text-center">Create Property</h1>
+    <div class="w-1/2 bg-white p-8 rounded-lg shadow-lg h-[140vh]">
+      <div class="flex items-center mb-10">
+        <!-- Font Awesome Icon -->
+        <i class="fas fa-home text-blue-600 text-2xl mr-3"></i>
+        <!-- Title -->
+        <h1 class="text-2xl font-bold text-blue-600">Publish a new Property</h1>
+      </div>
       <form
         [formGroup]="propertyForm"
         (ngSubmit)="onSubmit()"
@@ -231,14 +236,7 @@
     <!-- Properties Display Section (50% width) -->
     <div class="w-1/2 bg-white p-8 rounded-lg shadow-lg">
       <h2 class="text-2xl font-bold mb-6 text-center">Properties</h2>
-      <!-- Add your property display logic here -->
-      <!-- <div *ngFor="let property of properties" class="mb-4">
-            <div class="p-4 border border-gray-300 rounded-lg">
-              <h3 class="text-xl font-semibold">{{ property.title }}</h3>
-              <p class="text-gray-700">{{ property.address }}</p>
-              <p class="text-gray-700">${{ property.price }}</p>
-            </div>
-          </div> -->
+  <app-user-properties></app-user-properties>
     </div>
   </div>
 </div>

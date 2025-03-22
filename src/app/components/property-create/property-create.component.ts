@@ -7,11 +7,12 @@ import { Navbar2Component } from "../../shared/navbar2/navbar2.component";
 import { DataService } from '../../core/services/data.service';
 import { AuthService } from '../../core/services/auth.service';
 import { CloudinaryService } from '../../core/services/cloudinary.service';
+import { UserPropertiesComponent } from "../user-properties/user-properties.component";
 
 @Component({
   selector: 'app-property-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NavbarComponent, Navbar2Component],
+  imports: [ReactiveFormsModule, CommonModule, NavbarComponent, Navbar2Component, UserPropertiesComponent],
   templateUrl: './property-create.component.html',
   styleUrls: ['./property-create.component.css']
 })

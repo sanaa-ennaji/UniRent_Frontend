@@ -2,7 +2,7 @@
 
 <!-- component -->
 <div>
-  <div *ngIf="properties.length > 0; else noProperties" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-20 mx-4 w-2/3">
+  <div *ngIf="properties.length > 0; else noProperties" class="mt-10 mx-4 ">
     <div *ngFor="let property of properties" (click)="navigateToPropertyDetails(property.id)" class="cursor-pointer">
       <div>
         <div class="relative flex flex-col rounded-xl bg-clip-border text-gray-700">
