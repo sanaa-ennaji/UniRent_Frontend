@@ -9,6 +9,7 @@ import { PropertyDetailsComponent } from './components/property-details/property
 import { BookingFormComponent } from './components/booking-form/booking-form.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 import { UserBookingsComponent } from './components/user-bookings/user-bookings.component';
+import { LandlordBookingsComponent } from './components/landlord-bookings/landlord-bookings.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'properties/:id', component: PropertyDetailsComponent },
     { path: 'booking/:id', component: BookingFormComponent },
     { path: 'payment-success', component: PaymentSuccessComponent },
-    {path: 'user/booking', component: UserBookingsComponent}
+    {path: 'user/booking', component: UserBookingsComponent},
+    {path: 'landlord/bookings', component: LandlordBookingsComponent}
 
 ];

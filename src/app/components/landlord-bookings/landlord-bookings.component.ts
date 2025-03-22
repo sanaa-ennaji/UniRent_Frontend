@@ -4,11 +4,13 @@ import { AuthService } from '../../core/services/auth.service';
 import { BookingResponseDTO } from '../../models/booking.model';
 import { NavbarComponent } from "../../shared/navbar/navbar.component";
 import { CommonModule } from '@angular/common';
+import { Navbar3Component } from '../../shared/navbar3/navbar3.component';
+import { Navbar2Component } from '../../shared/navbar2/navbar2.component';
 
 @Component({
   selector: 'app-landlord-bookings',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule, Navbar2Component],
   templateUrl: './landlord-bookings.component.html',
   styleUrls: ['./landlord-bookings.component.css']
 
@@ -23,7 +25,7 @@ export class LandlordBookingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Get the authenticated landlord's ID
+
     const user = this.authService.getCurrentUser();
     if (user) {
       this.landlordId = user.id;

@@ -9,6 +9,8 @@ export interface PropertyRequest {
     universityIds: number[];
     images: ImageRequest[];
     amenityIds: number[];
+    start: string ; 
+    personNumbers: number; 
   }
 
   export interface ImageRequest {
@@ -27,6 +29,8 @@ export interface PropertyRequest {
     imageUrls: string[]; 
     amenities: AmenityResponse[];
     landlordName: string;
+    start: string ; 
+    personNumbers: number; 
   }
   
   export interface AmenityResponse {
