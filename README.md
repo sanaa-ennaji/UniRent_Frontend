@@ -63,8 +63,8 @@ For more information on using the Angular CLI, including detailed command refere
 Stripe provides test card numbers to simulate payments in Test Mode. Here are some examples:
 
 ### Test Card Numbers
-Card Number       	Description
-4242 4242 4242 4242	Visa (successful payment)
-4000 0027 6000 3184	Requires authentication
-4000 0000 0000 0002	Payment fails
-future expiration date (e.g., 12/34) and any CVC (e.g., 123).
+*** Card Number       	Description ***
+- 4242 4242 4242 4242	Visa (successful payment)
+- 4000 0027 6000 3184	Requires authentication
+- 4000 0000 0000 0002	Payment fails
+- future expiration date (e.g., 12/34) and any CVC (e.g., 123).

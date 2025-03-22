@@ -54,6 +54,38 @@
                   </select>
                 </div>
 
+                <!-- Number of Persons -->
+<!-- Number of Persons -->
+<div>
+  <label for="personNumbers" class="block text-sm font-medium text-gray-700">Number of Persons</label>
+  <input
+    id="personNumbers"
+    type="number"
+    formControlName="personNumbers"
+    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  <div *ngIf="getControl('personNumbers')?.invalid && getControl('personNumbers')?.touched" class="text-red-500 text-sm">
+    <span *ngIf="getControl('personNumbers')?.errors?.['min']">Number of persons must be at least 1.</span>
+    <span *ngIf="getControl('personNumbers')?.errors?.['max']">Number of persons cannot exceed 10.</span>
+  </div>
+</div>
+
+<!-- Start Date -->
+<div>
+  <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+  <input
+    id="startDate"
+    type="date"
+    formControlName="startDate"
+    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  <div *ngIf="getControl('startDate')?.invalid && getControl('startDate')?.touched" class="text-red-500 text-sm">
+    <span *ngIf="getControl('startDate')?.errors?.['futureOrPresent']">Start date must be in the present or future.</span>
+  </div>
+</div>
+
+
+                
                 <!-- Address -->
                 <div class="col-span-2">
                   <label for="address" class="block text-sm font-medium text-gray-700">

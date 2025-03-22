@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { PropertyService } from '../../core/services/property.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../shared/navbar/navbar.component";
@@ -42,6 +42,8 @@ export class PropertyCreateComponent implements OnInit {
       universityIds: [[], Validators.required],
       images: [[]],
       amenityIds: [[], Validators.required],
+      personNumbers: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
+      startDate: [null, [Validators.required, this.futureOrPresentValidator]]
     });
   }
 
@@ -88,7 +90,7 @@ export class PropertyCreateComponent implements OnInit {
         this.propertyForm.patchValue({
           universityIds: this.selectedUniversities.map(u => u.id),
         });
-        selectElement.value = ''; // Reset the select input
+        selectElement.value = ''; 
       }
     }
   }
@@ -128,6 +130,20 @@ export class PropertyCreateComponent implements OnInit {
       ...this.selectedFiles.slice(index + 1)
     ];
   }
+  futureOrPresentValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedDate = new Date(control.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); 
+  
+    if (selectedDate < today) {
+      return { futureOrPresent: true };
+    }
+    return null;
+  }
+  getControl(controlName: string): AbstractControl | null {
+    return this.propertyForm.get(controlName);
+  }
+
   onSubmit(): void {
     if (this.propertyForm.valid) {
       const uploadObservables = this.selectedFiles.map((file) =>

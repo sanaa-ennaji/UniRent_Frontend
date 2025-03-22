@@ -9,7 +9,7 @@ export interface PropertyRequest {
     universityIds: number[];
     images: ImageRequest[];
     amenityIds: number[];
-    start: string ; 
+    startDate: string ; 
     personNumbers: number; 
   }
 
@@ -29,7 +29,7 @@ export interface PropertyRequest {
     imageUrls: string[]; 
     amenities: AmenityResponse[];
     landlordName: string;
-    start: string ; 
+    startDate: string ; 
     personNumbers: number; 
   }
   
