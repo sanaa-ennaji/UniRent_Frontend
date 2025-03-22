@@ -20,3 +20,23 @@ describe('PropertyCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+.container {
+  display: flex;
+  gap: 2rem; /* Adjust the gap as needed */
+}
+
+.form-section {
+  width: 50%;
+}
+
+.properties-section {
+  width: 50%;
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; /* Adjust the gap as needed */
+}

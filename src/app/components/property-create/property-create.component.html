@@ -2,174 +2,243 @@
 <app-navbar2></app-navbar2>
 
 <div class="min-h-screen bg-gray-100 py-8">
-  <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold mb-6 text-center">Create Property</h1>
-    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="space-y-6">
-      <!-- Title -->
-      <div>
-        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-        <input
-          id="title"
-          formControlName="title"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Address -->
-      <div>
-        <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-        <input
-          id="address"
-          formControlName="address"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Price -->
-      <div>
-        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-        <input
-          id="price"
-          type="number"
-          formControlName="price"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Available -->
-      <div class="flex items-center">
-        <input
-          id="available"
-          type="checkbox"
-          formControlName="available"
-          class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-        />
-        <label for="available" class="ml-2 block text-sm text-gray-700">Available</label>
-      </div>
-
-      <!-- Description -->
-      <div>
-        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-        <textarea
-          id="description"
-          formControlName="description"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        ></textarea>
-      </div>
-
-      <!-- Type -->
-      <div>
-        <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
-        <input
-          id="type"
-          formControlName="type"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Images (File Input) -->
-      <div>
-        <label for="images" class="block text-sm font-medium text-gray-700">Images</label>
-        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-          <div class="space-y-1 text-center">
-            <svg
-              class="mx-auto h-12 w-12 text-gray-400"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 48 48"
-              aria-hidden="true"
+  <div class="flex max-w-7xl mx-auto gap-8">
+    <div class="w-1/2 bg-white p-8 rounded-lg shadow-lg">
+      <h1 class="text-2xl font-bold mb-6 text-center">Create Property</h1>
+      <form
+        [formGroup]="propertyForm"
+        (ngSubmit)="onSubmit()"
+        class="space-y-6"
+      >
+        <!-- Two-column layout for inputs -->
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Title -->
+          <div>
+            <label for="title" class="block text-sm font-medium text-gray-700"
+              >Title</label
             >
-              <path
-                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <div class="flex text-sm text-gray-600">
-              <label
-                for="images"
-                class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
-              >
-                <span>Upload images</span>
-                <input
-                  id="images"
-                  type="file"
-                  multiple
-                  (change)="onFileChange($event)"
-                  class="sr-only"
-                />
-              </label>
-              <p class="pl-1">or drag and drop</p>
-            </div>
-            <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+            <input
+              id="title"
+              formControlName="title"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <!-- Address -->
+          <div>
+            <label for="address" class="block text-sm font-medium text-gray-700"
+              >Address</label
+            >
+            <input
+              id="address"
+              formControlName="address"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <!-- Price -->
+          <div>
+            <label for="price" class="block text-sm font-medium text-gray-700"
+              >Price</label
+            >
+            <input
+              id="price"
+              type="number"
+              formControlName="price"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <!-- Type (Full width) -->
+          <div>
+            <label for="type" class="block text-sm font-medium text-gray-700"
+              >Type</label
+            >
+            <select
+              id="type"
+              formControlName="type"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="" disabled selected>Select a property type</option>
+              <option value="Apartment">Apartment</option>
+              <option value="House">House</option>
+              <option value="Villa">Villa</option>
+              <option value="Studio">Studio</option>
+              <option value="Condo">Condo</option>
+              <option value="Townhouse">Townhouse</option>
+            </select>
           </div>
         </div>
-        <!-- Display selected file names -->
-        <div *ngIf="selectedFiles.length > 0" class="mt-2">
-          <h4 class="text-sm font-medium text-gray-700">Selected Files:</h4>
-          <ul class="list-disc list-inside">
-            <li *ngFor="let file of selectedFiles" class="text-sm text-gray-600">{{ file.name }}</li>
-          </ul>
-        </div>
-      </div>
 
-      <!-- University IDs (Multi-Select Dropdown) -->
-      <div>
-        <label for="universityIds" class="block text-sm font-medium text-gray-700">
-          Select Universities
-        </label>
-        <div class="relative mt-1">
+        <!-- Description (Full width) -->
+        <div>
+          <label
+            for="description"
+            class="block text-sm font-medium text-gray-700 "
+            >Description</label
+          >
+          <textarea
+            id="description"
+            formControlName="description"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
+
+        <!-- Universities (Select Input with Tags) -->
+        <div>
+          <label
+            for="universityIds"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Select Universities
+          </label>
           <select
             id="universityIds"
-            formControlName="universityIds"
-            multiple
-            class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            (change)="addUniversity($event)"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
+            <option value="">Select a university</option>
             <option
               *ngFor="let university of universities"
               [value]="university.id"
-              class="px-3 py-2 hover:bg-blue-100"
             >
               {{ university.name }}
             </option>
           </select>
+
+          <!-- Display Selected Universities -->
+          <div class="mt-2">
+            <div
+              *ngFor="let university of selectedUniversities"
+              class="inline-flex items-center bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm mr-2 mb-2"
+            >
+              {{ university.name }}
+              <button
+                type="button"
+                (click)="removeUniversity(university)"
+                class="ml-2 text-blue-800 hover:text-blue-900"
+              >
+                &times;
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+        <!-- Available -->
+        <div class="flex items-center">
+          <input
+            id="available"
+            type="checkbox"
+            formControlName="available"
+            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <label for="available" class="ml-2 block text-sm text-gray-700"
+            >Available</label
+          >
+        </div>
 
+        <!-- Amenities (Checkboxes) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Select Amenities</label
+          >
+          <div class="mt-2 space-y-2">
+            <div *ngFor="let amenity of amenities" class="flex items-center">
+              <input
+                type="checkbox"
+                [id]="'amenity-' + amenity.id"
+                [value]="amenity.id"
+                (change)="onAmenityChange($event, amenity)"
+                class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <label
+                [for]="'amenity-' + amenity.id"
+                class="ml-2 text-sm text-gray-700"
+              >
+                {{ amenity.name }}
+              </label>
+            </div>
+          </div>
+        </div>
 
-<!-- Amenity -->
-<div>
-  <label for="amenityProperties" class="block text-sm font-medium text-gray-700">
-    Select Amenities
-  </label>
-  <div class="relative mt-1">
-    <select
-    id="amenityProperties"
-    formControlName="amenityIds"
-    multiple
-    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-  >
-    <option
-      *ngFor="let amenity of amenities"
-      [value]="amenity.id" 
-      class="px-3 py-2 hover:bg-blue-100"
-    >
-      {{ amenity.name }}
-    </option>
-  </select>
-  </div>
-</div>
+        <!-- Images -->
+        <div>
+          <label for="images" class="block text-sm font-medium text-gray-700"
+            >Images</label
+          >
+          <div
+            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+          >
+            <div class="space-y-1 text-center">
+              <svg
+                class="mx-auto h-12 w-12 text-gray-400"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <div class="flex text-sm text-gray-600">
+                <label
+                  for="images"
+                  class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+                >
+                  <span>Upload images</span>
+                  <input
+                    id="images"
+                    type="file"
+                    multiple
+                    (change)="onFileChange($event)"
+                    class="sr-only"
+                  />
+                </label>
+                <p class="pl-1">or drag and drop</p>
+              </div>
+              <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+            </div>
+          </div>
+          <!-- Display selected file names -->
+          <div *ngIf="selectedFiles.length > 0" class="mt-2">
+            <h4 class="text-sm font-medium text-gray-700">Selected Files:</h4>
+            <ul class="list-disc list-inside">
+              <li
+                *ngFor="let file of selectedFiles"
+                class="text-sm text-gray-600"
+              >
+                {{ file.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
 
-      <div class="text-center">
-        <button
-          type="submit"
-   
-          class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 "
-        >
-          Create Property
-        </button>
-      </div>
-    </form>
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button
+            type="submit"
+            class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Create Property
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Properties Display Section (50% width) -->
+    <div class="w-1/2 bg-white p-8 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold mb-6 text-center">Properties</h2>
+      <!-- Add your property display logic here -->
+      <!-- <div *ngFor="let property of properties" class="mb-4">
+            <div class="p-4 border border-gray-300 rounded-lg">
+              <h3 class="text-xl font-semibold">{{ property.title }}</h3>
+              <p class="text-gray-700">{{ property.address }}</p>
+              <p class="text-gray-700">${{ property.price }}</p>
+            </div>
+          </div> -->
+    </div>
   </div>
 </div>
