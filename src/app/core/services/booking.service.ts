@@ -20,7 +20,7 @@ export class BookingService {
     });
   }
 
-  getBookingsByUserId(userId: number): Observable<BookingResponseDTO[]> {
-    return this.http.get<BookingResponseDTO[]>(`${this.apiUrl}/user/${userId}`);
+  getAllBookings(): Observable<BookingResponseDTO[]> {
+    return this.http.get<BookingResponseDTO[]>(this.apiUrl);
   }
 }

@@ -33,8 +33,6 @@ export class UserPropertiesComponent implements OnInit {
     const user = this.authService.getCurrentUser();
     if (user) {
       this.userId = user.id;
-
-  
       this.propertyService.getProperties().subscribe((data) => {
         this.properties = data.filter((property) => property.landlordId === this.userId);
         console.log('User Properties:', this.properties);
