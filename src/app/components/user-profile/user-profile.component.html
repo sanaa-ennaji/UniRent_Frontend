@@ -1,25 +1,71 @@
-<div *ngIf="user" class="bg-white p-6 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold mb-4">User Profile</h2>
+<app-navbar></app-navbar>
+
+<div class="min-h-screen bg-gray-100 py-8">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+      <h1 class="text-2xl font-bold mb-6 text-center">User Profile</h1>
+      <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input
+            id="name"
+            formControlName="name"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div *ngIf="userProfileForm.get('name')?.invalid && userProfileForm.get('name')?.touched" class="text-red-500 text-sm">
+            <span *ngIf="userProfileForm.get('name')?.errors?.['required']">Name is required.</span>
+          </div>
+        </div>
   
-    <!-- Display User Information -->
-    <div class="space-y-4">
-      <div>
-        <label class="text-sm font-medium text-gray-700">User ID:</label>
-        <p class="text-gray-900">{{ user.id }}</p>
-      </div>
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input
+            id="email"
+            formControlName="email"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div *ngIf="userProfileForm.get('email')?.invalid && userProfileForm.get('email')?.touched" class="text-red-500 text-sm">
+            <span *ngIf="userProfileForm.get('email')?.errors?.['required']">Email is required.</span>
+            <span *ngIf="userProfileForm.get('email')?.errors?.['email']">Invalid email format.</span>
+          </div>
+        </div>
   
-      <div>
-        <label class="text-sm font-medium text-gray-700">Email:</label>
-        <p class="text-gray-900">{{ user.email }}</p>
-      </div>
+        <!-- Phone Number -->
+        <div>
+          <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+          <input
+            id="phoneNumber"
+            formControlName="phoneNumber"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
   
-      <div>
-        <label class="text-sm font-medium text-gray-700">Role:</label>
-        <p class="text-gray-900">{{ user.roleName }}</p>
-      </div>
+        <!-- Password -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div *ngIf="userProfileForm.get('password')?.invalid && userProfileForm.get('password')?.touched" class="text-red-500 text-sm">
+            <span *ngIf="userProfileForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</span>
+            <span *ngIf="userProfileForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters.</span>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button
+            type="submit"
+            [disabled]="userProfileForm.invalid"
+            class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            Update Profile
+          </button>
+        </div>
+      </form>
     </div>
-  </div>
-  
-  <div *ngIf="!user" class="text-center text-gray-700">
-    <p>No user information available. Please log in.</p>
   </div>

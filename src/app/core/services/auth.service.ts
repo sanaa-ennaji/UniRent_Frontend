@@ -59,8 +59,6 @@ export class AuthService {
     return null;
   }
 
-  updateUser(id: number, userRequestDTO: UserRequestDTO): Observable<UserResponseDTO> {
-    return this.http.put<UserResponseDTO>(`${this.apiUrl}/${id}`, userRequestDTO);
-  }
+
   
 }

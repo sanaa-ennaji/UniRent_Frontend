@@ -16,4 +16,11 @@ export class UserService {
   registerUser(userRequest: UserRequestDTO): Observable<UserResponseDTO> {
     return this.http.post<UserResponseDTO>(this.apiUrl, userRequest);
   }
+  updateUser(id: number, userRequestDTO: UserRequestDTO): Observable<UserResponseDTO> {
+    return this.http.put<UserResponseDTO>(`${this.apiUrl}/${id}`, userRequestDTO);
+  }
+
+  getUserById(id: number): Observable<UserResponseDTO> {
+    return this.http.get<UserResponseDTO>(`${this.apiUrl}/${id}`);
+  }
 }
