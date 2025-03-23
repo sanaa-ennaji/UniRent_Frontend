@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { PropertyService } from '../../core/services/property.service';
 import { CommonModule } from '@angular/common';
@@ -8,7 +8,8 @@ import { DataService } from '../../core/services/data.service';
 import { AuthService } from '../../core/services/auth.service';
 import { CloudinaryService } from '../../core/services/cloudinary.service';
 import { UserPropertiesComponent } from "../user-properties/user-properties.component";
-import * as L from 'leaflet';
+import { isPlatformBrowser } from '@angular/common';
+declare var google: any;
 @Component({
   selector: 'app-property-create',
   standalone: true,
@@ -23,14 +24,19 @@ export class PropertyCreateComponent implements OnInit {
   selectedFiles: File[] = [];
   selectedUniversities: any[] = [];
   selectedAmenities: any[] = [];
+  private isBrowser: boolean;
+  private map: any;
+  private marker: any;
 
   constructor(
     private fb: FormBuilder,
     private propertyService: PropertyService,
     private dataService: DataService,
     private authService: AuthService,
-    private cloudinaryService: CloudinaryService
+    private cloudinaryService: CloudinaryService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
       address: ['', Validators.required],
@@ -57,6 +63,41 @@ export class PropertyCreateComponent implements OnInit {
 
     this.fetchUniversities();
     this.fetchAmenities();
+  }
+
+  
+  ngAfterViewInit(): void {
+    if (this.isBrowser) {
+      this.initMap();
+    }
+  }
+  private initMap(): void {
+    const mapOptions = {
+      center: { lat: 31.7917, lng: -7.0926 }, 
+      zoom: 6 
+    };
+
+    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+
+    this.map.addListener('click', (event: any) => {
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
+
+      this.propertyForm.patchValue({
+        latitude: lat,
+        longitude: lng
+      });
+
+      if (!this.marker) {
+        this.marker = new google.maps.Marker({
+          position: { lat, lng },
+          map: this.map
+        });
+      } else {
+        this.marker.setPosition({ lat, lng });
+      }
+    });
   }
 
   fetchUniversities(): void {
