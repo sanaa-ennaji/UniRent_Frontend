@@ -5,6 +5,8 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoginRequestDTO } from '../../models/login-request.model';
 import { AuthenticationResponse } from '../../models/authResponse.model';
+import { UserRequestDTO } from '../../models/user-request.model';
+import { UserResponseDTO } from '../../models/user-response.model';
 
 
 @Injectable({
@@ -24,6 +26,7 @@ export class AuthService {
       })
     );
   }
+
 
   logout(): void {
     localStorage.removeItem('jwt');
@@ -56,5 +59,8 @@ export class AuthService {
     return null;
   }
 
+  updateUser(id: number, userRequestDTO: UserRequestDTO): Observable<UserResponseDTO> {
+    return this.http.put<UserResponseDTO>(`${this.apiUrl}/${id}`, userRequestDTO);
+  }
   
 }
