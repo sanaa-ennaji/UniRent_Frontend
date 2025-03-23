@@ -10,6 +10,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { CloudinaryService } from '../../core/services/cloudinary.service';
 import { UserPropertiesComponent } from "../user-properties/user-properties.component";
 import * as L from 'leaflet';
+
 @Component({
   selector: 'app-property-create',
   standalone: true,
@@ -24,7 +25,7 @@ export class PropertyCreateComponent implements OnInit, AfterViewInit {
   selectedFiles: File[] = [];
   selectedUniversities: any[] = [];
   selectedAmenities: any[] = [];
-  private isBrowser: boolean;
+  private isBrowser: boolean; 
 
   constructor(
     private fb: FormBuilder,
@@ -32,8 +33,11 @@ export class PropertyCreateComponent implements OnInit, AfterViewInit {
     private dataService: DataService,
     private authService: AuthService,
     private cloudinaryService: CloudinaryService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object 
   ) {
+    // Initialize isBrowser
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
       address: ['', Validators.required],
@@ -135,6 +139,7 @@ export class PropertyCreateComponent implements OnInit, AfterViewInit {
       ...this.selectedFiles.slice(index + 1)
     ];
   }
+
   futureOrPresentValidator(control: AbstractControl): ValidationErrors | null {
     const selectedDate = new Date(control.value);
     const today = new Date();
@@ -145,11 +150,10 @@ export class PropertyCreateComponent implements OnInit, AfterViewInit {
     }
     return null;
   }
+
   getControl(controlName: string): AbstractControl | null {
     return this.propertyForm.get(controlName);
   }
-
- 
 
   ngAfterViewInit(): void {
     if (this.isBrowser) {
