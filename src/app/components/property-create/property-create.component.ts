@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { PropertyService } from '../../core/services/property.service';
 import { CommonModule } from '@angular/common';
@@ -8,7 +9,7 @@ import { DataService } from '../../core/services/data.service';
 import { AuthService } from '../../core/services/auth.service';
 import { CloudinaryService } from '../../core/services/cloudinary.service';
 import { UserPropertiesComponent } from "../user-properties/user-properties.component";
-
+import * as L from 'leaflet';
 @Component({
   selector: 'app-property-create',
   standalone: true,
@@ -16,20 +17,22 @@ import { UserPropertiesComponent } from "../user-properties/user-properties.comp
   templateUrl: './property-create.component.html',
   styleUrls: ['./property-create.component.css']
 })
-export class PropertyCreateComponent implements OnInit {
+export class PropertyCreateComponent implements OnInit, AfterViewInit {
   propertyForm: FormGroup;
   universities: any[] = [];
   amenities: any[] = [];
   selectedFiles: File[] = [];
   selectedUniversities: any[] = [];
   selectedAmenities: any[] = [];
+  private isBrowser: boolean;
 
   constructor(
     private fb: FormBuilder,
     private propertyService: PropertyService,
     private dataService: DataService,
     private authService: AuthService,
-    private cloudinaryService: CloudinaryService
+    private cloudinaryService: CloudinaryService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
@@ -43,7 +46,9 @@ export class PropertyCreateComponent implements OnInit {
       images: [[]],
       amenityIds: [[], Validators.required],
       personNumbers: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
-      startDate: [null, [Validators.required, this.futureOrPresentValidator]]
+      startDate: [null, [Validators.required, this.futureOrPresentValidator]],
+      latitude: [null],
+      longitude: [null]
     });
   }
 
@@ -142,6 +147,35 @@ export class PropertyCreateComponent implements OnInit {
   }
   getControl(controlName: string): AbstractControl | null {
     return this.propertyForm.get(controlName);
+  }
+
+ 
+
+  ngAfterViewInit(): void {
+    if (this.isBrowser) {
+      import('leaflet').then((L) => {
+        const map = L.map('map').setView([31.7917, -7.0926], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors',
+        }).addTo(map);
+
+        let marker: L.Marker | null = null;
+
+        map.on('click', (e: L.LeafletMouseEvent) => {
+          const { lat, lng } = e.latlng;
+          this.propertyForm.patchValue({
+            latitude: lat,
+            longitude: lng,
+          });
+          if (marker) {
+            marker.setLatLng([lat, lng]);
+          } else {
+            marker = L.marker([lat, lng]).addTo(map);
+          }
+        });
+      });
+    }
   }
 
   onSubmit(): void {

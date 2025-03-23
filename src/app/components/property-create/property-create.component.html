@@ -1,26 +1,42 @@
 <app-navbar></app-navbar>
 <app-navbar2></app-navbar2>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<div class="min-h-screen bg-gray-50 py-10 ">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
+<div class="min-h-screen bg-gray-50 py-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row gap-8">
       <div class="md:w-3/5 bg-white rounded-xl shadow-md overflow-hidden">
         <div class="bg-gradient-to-r from-blue-500 to-blue-600 py-6 px-8">
           <div class="flex items-center">
             <i class="fas fa-home text-white text-2xl mr-3"></i>
-            <h1 class="text-2xl font-bold text-white">Publish a new Property</h1>
+            <h1 class="text-2xl font-bold text-white">
+              Publish a new Property
+            </h1>
           </div>
         </div>
-        
+
         <div class="p-8">
-          <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="space-y-8">
+          <form
+            [formGroup]="propertyForm"
+            (ngSubmit)="onSubmit()"
+            class="space-y-8"
+          >
             <!-- Basic Information Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b border-gray-300 pb-2 mb-4">Basic Information</h2>
+              <h2
+                class="text-lg font-medium text-gray-900 border-b border-gray-300 pb-2 mb-4"
+              >
+                Basic Information
+              </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Title -->
                 <div class="col-span-2 md:col-span-1">
-                  <label for="title" class="block text-sm font-medium text-gray-700">
+                  <label
+                    for="title"
+                    class="block text-sm font-medium text-gray-700"
+                  >
                     Property Title <span class="text-red-500">*</span>
                   </label>
                   <input
@@ -29,14 +45,23 @@
                     placeholder="Enter a descriptive title"
                     class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
-                  <div *ngIf="propertyForm.get('title')?.invalid && propertyForm.get('title')?.touched" class="mt-1 text-sm text-red-600">
+                  <div
+                    *ngIf="
+                      propertyForm.get('title')?.invalid &&
+                      propertyForm.get('title')?.touched
+                    "
+                    class="mt-1 text-sm text-red-600"
+                  >
                     Title is required
                   </div>
                 </div>
 
                 <!-- Type -->
                 <div class="col-span-2 md:col-span-1">
-                  <label for="type" class="block text-sm font-medium text-gray-700">
+                  <label
+                    for="type"
+                    class="block text-sm font-medium text-gray-700"
+                  >
                     Property Type <span class="text-red-500">*</span>
                   </label>
                   <select
@@ -44,7 +69,9 @@
                     formControlName="type"
                     class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
-                    <option value="" disabled selected>Select a property type</option>
+                    <option value="" disabled selected>
+                      Select a property type
+                    </option>
                     <option value="Apartment">Apartment</option>
                     <option value="House">House</option>
                     <option value="Villa">Villa</option>
@@ -55,40 +82,68 @@
                 </div>
 
                 <!-- Number of Persons -->
-<!-- Number of Persons -->
-<div>
-  <label for="personNumbers" class="block text-sm font-medium text-gray-700">Number of Persons</label>
-  <input
-    id="personNumbers"
-    type="number"
-    formControlName="personNumbers"
-    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-  />
-  <div *ngIf="getControl('personNumbers')?.invalid && getControl('personNumbers')?.touched" class="text-red-500 text-sm">
-    <span *ngIf="getControl('personNumbers')?.errors?.['min']">Number of persons must be at least 1.</span>
-    <span *ngIf="getControl('personNumbers')?.errors?.['max']">Number of persons cannot exceed 10.</span>
-  </div>
-</div>
+                <!-- Number of Persons -->
+                <div>
+                  <label
+                    for="personNumbers"
+                    class="block text-sm font-medium text-gray-700"
+                    >Number of Persons</label
+                  >
+                  <input
+                    id="personNumbers"
+                    type="number"
+                    formControlName="personNumbers"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <div
+                    *ngIf="
+                      getControl('personNumbers')?.invalid &&
+                      getControl('personNumbers')?.touched
+                    "
+                    class="text-red-500 text-sm"
+                  >
+                    <span *ngIf="getControl('personNumbers')?.errors?.['min']"
+                      >Number of persons must be at least 1.</span
+                    >
+                    <span *ngIf="getControl('personNumbers')?.errors?.['max']"
+                      >Number of persons cannot exceed 10.</span
+                    >
+                  </div>
+                </div>
 
-<!-- Start Date -->
-<div>
-  <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
-  <input
-    id="startDate"
-    type="date"
-    formControlName="startDate"
-    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-  />
-  <div *ngIf="getControl('startDate')?.invalid && getControl('startDate')?.touched" class="text-red-500 text-sm">
-    <span *ngIf="getControl('startDate')?.errors?.['futureOrPresent']">Start date must be in the present or future.</span>
-  </div>
-</div>
+                <!-- Start Date -->
+                <div>
+                  <label
+                    for="startDate"
+                    class="block text-sm font-medium text-gray-700"
+                    >Start Date</label
+                  >
+                  <input
+                    id="startDate"
+                    type="date"
+                    formControlName="startDate"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <div
+                    *ngIf="
+                      getControl('startDate')?.invalid &&
+                      getControl('startDate')?.touched
+                    "
+                    class="text-red-500 text-sm"
+                  >
+                    <span
+                      *ngIf="getControl('startDate')?.errors?.['futureOrPresent']"
+                      >Start date must be in the present or future.</span
+                    >
+                  </div>
+                </div>
 
-
-                
                 <!-- Address -->
                 <div class="col-span-2">
-                  <label for="address" class="block text-sm font-medium text-gray-700">
+                  <label
+                    for="address"
+                    class="block text-sm font-medium text-gray-700"
+                  >
                     Address <span class="text-red-500">*</span>
                   </label>
                   <input
@@ -101,11 +156,16 @@
 
                 <!-- Price -->
                 <div class="col-span-1">
-                  <label for="price" class="block text-sm font-medium text-gray-700">
+                  <label
+                    for="price"
+                    class="block text-sm font-medium text-gray-700"
+                  >
                     Price (DH) <span class="text-red-500">*</span>
                   </label>
                   <div class="mt-1 relative rounded-lg shadow-sm">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
                       <span class="text-gray-500 sm:text-sm">DH</span>
                     </div>
                     <input
@@ -129,7 +189,9 @@
                         formControlName="available"
                         class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <span class="ml-2 text-sm text-gray-700">Available for Rent</span>
+                      <span class="ml-2 text-sm text-gray-700"
+                        >Available for Rent</span
+                      >
                     </label>
                   </div>
                 </div>
@@ -138,9 +200,19 @@
 
             <!-- Description Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b  border-gray-300 pb-2 mb-4">Property Description</h2>
-              <label for="description" class="block text-sm font-medium text-gray-700">
-                Description <span class="text-gray-400">(rooms, kitchen, toilet, living room...)</span>
+              <h2
+                class="text-lg font-medium text-gray-900 border-b border-gray-300 pb-2 mb-4"
+              >
+                Property Description
+              </h2>
+              <label
+                for="description"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Description
+                <span class="text-gray-400"
+                  >(rooms, kitchen, toilet, living room...)</span
+                >
               </label>
               <textarea
                 id="description"
@@ -153,8 +225,15 @@
 
             <!-- Location Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b  border-gray-300 pb-2 mb-4">Location</h2>
-              <label for="universityIds" class="block text-sm font-medium text-gray-700">
+              <h2
+                class="text-lg font-medium text-gray-900 border-b border-gray-300 pb-2 mb-4"
+              >
+                Location
+              </h2>
+              <label
+                for="universityIds"
+                class="block text-sm font-medium text-gray-700"
+              >
                 Nearby Universities <span class="text-red-500">*</span>
               </label>
               <select
@@ -163,7 +242,10 @@
                 class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="">Select a university</option>
-                <option *ngFor="let university of universities" [value]="university.id">
+                <option
+                  *ngFor="let university of universities"
+                  [value]="university.id"
+                >
                   {{ university.name }}
                 </option>
               </select>
@@ -185,17 +267,29 @@
                   </button>
                 </div>
               </div>
-              <div *ngIf="propertyForm.get('universityIds')?.invalid && propertyForm.get('universityIds')?.touched" 
-                   class="mt-1 text-sm text-red-600">
+              <div
+                *ngIf="
+                  propertyForm.get('universityIds')?.invalid &&
+                  propertyForm.get('universityIds')?.touched
+                "
+                class="mt-1 text-sm text-red-600"
+              >
                 Please select at least one university
               </div>
             </div>
 
             <!-- Amenities Section -->
             <div>
-              <h2 class="text-lg font-medium text-gray-900 border-b  border-gray-300 pb-2 mb-4">Amenities</h2>
+              <h2
+                class="text-lg font-medium text-gray-900 border-b border-gray-300 pb-2 mb-4"
+              >
+                Amenities
+              </h2>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <div *ngFor="let amenity of amenities" class="flex items-center">
+                <div
+                  *ngFor="let amenity of amenities"
+                  class="flex items-center"
+                >
                   <input
                     type="checkbox"
                     [id]="'amenity-' + amenity.id"
@@ -203,78 +297,96 @@
                     (change)="onAmenityChange($event, amenity)"
                     class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  <label [for]="'amenity-' + amenity.id" class="ml-2 text-sm text-gray-700">
+                  <label
+                    [for]="'amenity-' + amenity.id"
+                    class="ml-2 text-sm text-gray-700"
+                  >
                     {{ amenity.name }}
                   </label>
                 </div>
               </div>
-              <div *ngIf="propertyForm.get('amenityIds')?.invalid && propertyForm.get('amenityIds')?.touched" 
-                   class="mt-1 text-sm text-red-600">
+              <div
+                *ngIf="
+                  propertyForm.get('amenityIds')?.invalid &&
+                  propertyForm.get('amenityIds')?.touched
+                "
+                class="mt-1 text-sm text-red-600"
+              >
                 Please select at least one amenity
               </div>
             </div>
- <!-- Images -->
- <div>
-  <label for="images" class="block text-sm font-medium text-gray-700"
-    >Images</label
-  >
-  <div
-    class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
-  >
-    <div class="space-y-1 text-center">
-      <svg
-        class="mx-auto h-12 w-12 text-gray-400"
-        stroke="currentColor"
-        fill="none"
-        viewBox="0 0 48 48"
-        aria-hidden="true"
-      >
-        <path
-          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <div class="flex text-sm text-gray-600">
-        <label
-          for="images"
-          class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
-        >
-          <span>Upload images</span>
-          <input
-            id="images"
-            type="file"
-            multiple
-            (change)="onFileChange($event)"
-            class="sr-only"
-          />
-        </label>
-        <p class="pl-1">or drag and drop</p>
-      </div>
-      <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-    </div>
-  </div>
-  <!-- Display selected file names -->
-  <div *ngIf="selectedFiles.length > 0" class="mt-2">
-    <h4 class="text-sm font-medium text-gray-700">Selected Files:</h4>
-    <ul class="list-disc list-inside">
-      <li
-        *ngFor="let file of selectedFiles; let i = index"
-        class="text-sm text-gray-600 flex items-center"
-      >
-        <span>{{ file.name }}</span>
-        <button
-          type="button"
-          (click)="removeFile(i)"
-          class="ml-2 text-red-500 hover:text-red-700"
-        >
-          ×
-        </button>
-      </li>
-    </ul>
-  </div>
-</div>
+            <!-- Images -->
+            <div>
+              <label
+                for="images"
+                class="block text-sm font-medium text-gray-700"
+                >Images</label
+              >
+              <div
+                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+              >
+                <div class="space-y-1 text-center">
+                  <svg
+                    class="mx-auto h-12 w-12 text-gray-400"
+                    stroke="currentColor"
+                    fill="none"
+                    viewBox="0 0 48 48"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <div class="flex text-sm text-gray-600">
+                    <label
+                      for="images"
+                      class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+                    >
+                      <span>Upload images</span>
+                      <input
+                        id="images"
+                        type="file"
+                        multiple
+                        (change)="onFileChange($event)"
+                        class="sr-only"
+                      />
+                    </label>
+                    <p class="pl-1">or drag and drop</p>
+                  </div>
+                  <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                </div>
+              </div>
+              <!-- Display selected file names -->
+              <div *ngIf="selectedFiles.length > 0" class="mt-2">
+                <h4 class="text-sm font-medium text-gray-700">
+                  Selected Files:
+                </h4>
+                <ul class="list-disc list-inside">
+                  <li
+                    *ngFor="let file of selectedFiles; let i = index"
+                    class="text-sm text-gray-600 flex items-center"
+                  >
+                    <span>{{ file.name }}</span>
+                    <button
+                      type="button"
+                      (click)="removeFile(i)"
+                      class="ml-2 text-red-500 hover:text-red-700"
+                    >
+                      ×
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Select Location</label>
+              <div id="map" class="h-64 mt-1 rounded-lg"></div>
+              <input type="hidden" formControlName="latitude" />
+              <input type="hidden" formControlName="longitude" />
+            </div>
 
             <!-- Submit Button -->
             <div class="pt-4 flex justify-end">

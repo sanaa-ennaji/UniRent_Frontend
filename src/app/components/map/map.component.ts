@@ -8,7 +8,7 @@ import { UniversityService } from '../../core/services/university.service';
 })
 export class MapComponent implements OnInit {
   private map: any;
-  private L: any; // Declare Leaflet as a dynamic import
+  private L: any; 
 
   constructor(private universityService: UniversityService) {}
 

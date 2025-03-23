@@ -24,6 +24,6 @@ export const routes: Routes = [
     { path: 'payment-success', component: PaymentSuccessComponent },
     {path: 'user/booking', component: UserBookingsComponent},
     {path: 'landlord/bookings', component: LandlordBookingsComponent},
-    { path: 'user-profile', component: UserProfileComponent }
+    { path: 'profile', component: UserProfileComponent }
 
 ];
