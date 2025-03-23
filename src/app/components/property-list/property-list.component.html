@@ -1,5 +1,110 @@
 <app-navbar></app-navbar>
-<app-navbar3></app-navbar3>
+
+<nav class="bg-white dark:bg-gray-800 w-full z-10 mt-20 border-b border-gray-200 antialiased">
+  <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0 py-4">
+    <div class="flex items-center justify-between gap-4">
+      <!-- Search Bar -->
+      <div class="flex-1 relative">
+        <input
+        id="searchTitle"
+        [(ngModel)]="searchTitle" 
+          type="text"
+          placeholder="Search properties..."
+          class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg
+            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="2"
+              d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+            />
+          </svg>
+        </span>
+      </div>
+
+      <!-- Price Filter -->
+      <div class="relative">
+        <input
+      id="searchPrice"
+      type="number"
+      [(ngModel)]="searchPrice" 
+      class="appearance-none pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      placeholder="Enter max price..."
+    />
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg
+            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </span>
+      </div>
+
+      <!-- Date Filter -->
+      <div class="relative">
+        <input
+        id="searchStartDate"
+        [(ngModel)]="searchStartDate" 
+          type="date"
+          class="appearance-none pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg
+            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 10h16M8 14h8m-4-7V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
+            />
+          </svg>
+        </span>
+      </div>
+
+      <div class="flex items-end">
+        <button
+          (click)="searchProperties()"
+          class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Search
+        </button>
+        </div>
+    </div>
+  </div>
+</nav>
+
+
+
 <div class="text-blue-600 mt-6 mx-5 font-bold flex items-center">
   <a href="/" class="hover:underline flex items-center">
     Home
@@ -9,7 +114,7 @@
 </div>
 
 <!-- Main container -->
-<div class="flex">
+<div class="flex w-[100vw]">
   <!-- Properties list -->
   <div *ngIf="properties.length > 0; else noProperties" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3 mx-4 w-2/3 overflow-y-auto h-screen">
     <div *ngFor="let property of properties" (click)="navigateToPropertyDetails(property.id)" class="cursor-pointer h-[60vh]">
@@ -47,7 +152,7 @@
   </ng-template>
 
   <!-- Map -->
-  <div class="w-1/3 h-screen sticky top-0">
+  <div class="h-screen sticky top-0">
     <app-map></app-map>
   </div>
 </div>

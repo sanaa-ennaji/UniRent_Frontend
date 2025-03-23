@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PropertyRequest, PropertyResponse } from '../../models/property.model';
 
@@ -29,5 +29,15 @@ export class PropertyService {
 
   deleteProperty(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+
+  searchProperties(title?: string, price?: number, startDate?: Date): Observable<PropertyResponse[]> {
+    const params = new HttpParams()
+      .set('title', title || '')
+      .set('price', price ? price.toString() : '')
+      .set('startDate', startDate ? startDate.toISOString() : '');
+
+    return this.http.get<PropertyResponse[]>(`${this.apiUrl}/search`, { params });
   }
 }

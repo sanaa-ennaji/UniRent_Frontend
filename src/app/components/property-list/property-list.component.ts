@@ -4,20 +4,23 @@ import { PropertyService } from '../../core/services/property.service';
 import { PropertyResponse } from '../../models/property.model';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { Navbar3Component } from '../../shared/navbar3/navbar3.component';
 import { MapComponent } from "../map/map.component";
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-property-list',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, Navbar3Component, MapComponent],
+  imports: [CommonModule, NavbarComponent, MapComponent, FormsModule],
   templateUrl: './property-list.component.html',
   styleUrls: ['./property-list.component.css'],
 })
 export class PropertyListComponent implements OnInit {
   properties: PropertyResponse[] = [];
-
+  searchTitle: string = '';
+  searchPrice: number | null = null;
+  searchStartDate: string | null = null;
   constructor(private propertyService: PropertyService,
     private router: Router
   ) {}
@@ -42,6 +45,20 @@ export class PropertyListComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching properties:', error);
+      }
+    );
+  }
+
+  searchProperties(): void {
+    const price = this.searchPrice !== null ? this.searchPrice : undefined;
+    const startDate = this.searchStartDate ? new Date(this.searchStartDate) : undefined;
+
+    this.propertyService.searchProperties(this.searchTitle, price, startDate).subscribe(
+      (data) => {
+        this.properties = data;
+      },
+      (error) => {
+        console.error('Error searching properties:', error);
       }
     );
   }
