@@ -11,6 +11,7 @@ import { PaymentSuccessComponent } from './components/payment-success/payment-su
 import { UserBookingsComponent } from './components/user-bookings/user-bookings.component';
 import { LandlordBookingsComponent } from './components/landlord-bookings/landlord-bookings.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { MapComponent } from './components/map/map.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'payment-success', component: PaymentSuccessComponent },
     {path: 'user/booking', component: UserBookingsComponent},
     {path: 'landlord/bookings', component: LandlordBookingsComponent},
-    { path: 'profile', component: UserProfileComponent }
+    { path: 'profile', component: UserProfileComponent },
+    {path: 'map', component: MapComponent}
 
 ];

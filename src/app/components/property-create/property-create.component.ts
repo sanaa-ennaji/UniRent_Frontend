@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { PropertyService } from '../../core/services/property.service';
 import { CommonModule } from '@angular/common';
@@ -10,7 +9,6 @@ import { AuthService } from '../../core/services/auth.service';
 import { CloudinaryService } from '../../core/services/cloudinary.service';
 import { UserPropertiesComponent } from "../user-properties/user-properties.component";
 import * as L from 'leaflet';
-
 @Component({
   selector: 'app-property-create',
   standalone: true,
@@ -18,26 +16,21 @@ import * as L from 'leaflet';
   templateUrl: './property-create.component.html',
   styleUrls: ['./property-create.component.css']
 })
-export class PropertyCreateComponent implements OnInit, AfterViewInit {
+export class PropertyCreateComponent implements OnInit {
   propertyForm: FormGroup;
   universities: any[] = [];
   amenities: any[] = [];
   selectedFiles: File[] = [];
   selectedUniversities: any[] = [];
   selectedAmenities: any[] = [];
-  private isBrowser: boolean; 
 
   constructor(
     private fb: FormBuilder,
     private propertyService: PropertyService,
     private dataService: DataService,
     private authService: AuthService,
-    private cloudinaryService: CloudinaryService,
-    @Inject(PLATFORM_ID) private platformId: Object 
+    private cloudinaryService: CloudinaryService
   ) {
-    // Initialize isBrowser
-    this.isBrowser = isPlatformBrowser(this.platformId);
-
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
       address: ['', Validators.required],
@@ -51,7 +44,7 @@ export class PropertyCreateComponent implements OnInit, AfterViewInit {
       amenityIds: [[], Validators.required],
       personNumbers: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
       startDate: [null, [Validators.required, this.futureOrPresentValidator]],
-      latitude: [null],
+        latitude: [null],
       longitude: [null]
     });
   }
@@ -139,7 +132,6 @@ export class PropertyCreateComponent implements OnInit, AfterViewInit {
       ...this.selectedFiles.slice(index + 1)
     ];
   }
-
   futureOrPresentValidator(control: AbstractControl): ValidationErrors | null {
     const selectedDate = new Date(control.value);
     const today = new Date();
@@ -150,37 +142,12 @@ export class PropertyCreateComponent implements OnInit, AfterViewInit {
     }
     return null;
   }
-
   getControl(controlName: string): AbstractControl | null {
     return this.propertyForm.get(controlName);
   }
 
-  ngAfterViewInit(): void {
-    if (this.isBrowser) {
-      import('leaflet').then((L) => {
-        const map = L.map('map').setView([31.7917, -7.0926], 6);
+ 
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© OpenStreetMap contributors',
-        }).addTo(map);
-
-        let marker: L.Marker | null = null;
-
-        map.on('click', (e: L.LeafletMouseEvent) => {
-          const { lat, lng } = e.latlng;
-          this.propertyForm.patchValue({
-            latitude: lat,
-            longitude: lng,
-          });
-          if (marker) {
-            marker.setLatLng([lat, lng]);
-          } else {
-            marker = L.marker([lat, lng]).addTo(map);
-          }
-        });
-      });
-    }
-  }
 
   onSubmit(): void {
     if (this.propertyForm.valid) {
