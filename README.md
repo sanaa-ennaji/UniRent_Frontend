@@ -71,3 +71,7 @@ Stripe provides test card numbers to simulate payments in Test Mode. Here are so
 
 ### map 
 - npm install ol
+
+### guards
+
+ng generate guard auth

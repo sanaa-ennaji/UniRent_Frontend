@@ -24,10 +24,5 @@ export class NavbarComponent {
     this.isDropdownOpen = !this.isDropdownOpen ; 
   }
 
-  // constructor(private authService: AuthService, private router: Router) {}
-  //  logout(): void {
-  //   this.authService.logout();
-  //   this.router.navigate(['/login']);
-  //   this.isDropdownOpen = false; 
-  // }
+
 }

@@ -13,19 +13,23 @@ import { LandlordBookingsComponent } from './components/landlord-bookings/landlo
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { MapComponent } from './components/map/map.component';
 
-export const routes: Routes = [
-    { path: '', component: HomepageComponent },
-    {path: 'login', component: LoginComponent},
-    {path: 'register',component: RegisterComponent },
-    {path: 'property/create' , component: PropertyCreateComponent},
-    {path: 'sidebar' , component : Navbar2Component },
-    {path: 'propertyList', component: PropertyListComponent},
-    { path: 'properties/:id', component: PropertyDetailsComponent },
-    { path: 'booking/:id', component: BookingFormComponent },
-    { path: 'payment-success', component: PaymentSuccessComponent },
-    {path: 'user/booking', component: UserBookingsComponent},
-    {path: 'landlord/bookings', component: LandlordBookingsComponent},
-    { path: 'profile', component: UserProfileComponent },
-    {path: 'map', component: MapComponent}
+import { AuthGuard } from './core/guards/auth.guard';
+import { RoleGuard } from './core/guards/role.guard';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
+export const routes: Routes = [
+  { path: '', component: HomepageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'property/create', component: PropertyCreateComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'LANDLORD' } },
+  { path: 'sidebar', component: Navbar2Component },
+  { path: 'propertyList', component: PropertyListComponent },
+  { path: 'properties/:id', component: PropertyDetailsComponent },
+  { path: 'booking/:id', component: BookingFormComponent, canActivate: [AuthGuard] },
+  { path: 'payment-success', component: PaymentSuccessComponent },
+  { path: 'user/booking', component: UserBookingsComponent, canActivate: [AuthGuard] },
+  { path: 'landlord/bookings', component: LandlordBookingsComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'LANDLORD' } },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'map', component: MapComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent }, 
 ];
