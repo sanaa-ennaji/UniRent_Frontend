@@ -2,3 +2,79 @@
     height: 100vh;
     width: 40vw;
   }
+  #map {
+    height: 100vh;
+    width: 40vw;
+  }
+  
+  .ol-popup {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+    min-width: 150px;
+    z-index: 1000;
+  }
+  
+  .ol-popup:after, .ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  .ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+  }
+  
+  .ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+  }
+  
+  .popup-content {
+    font-family: Arial, sans-serif;
+    background-color: white;
+  }
+  
+  .popup-content h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .popup-content p {
+    margin: 0;
+    color: #666;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .property-popup {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .property-popup:hover {
+    transform: scale(1.05);
+  }
+  
+  .property-popup .popup-content p {
+    color: #DB4437;
+  }
+  
+  .university-popup .popup-content h3 {
+    color: #4285F4;
+  }

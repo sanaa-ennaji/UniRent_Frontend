@@ -68,5 +68,6 @@ Stripe provides test card numbers to simulate payments in Test Mode. Here are so
 - 4000 0027 6000 3184	Requires authentication
 - 4000 0000 0000 0002	Payment fails
 - future expiration date (e.g., 12/34) and any CVC (e.g., 123).
-// AIzaSyBpHpmrOKccP7KzMJSR_RzqXVAV0YrODJw
-npm install @angular/google-maps
+
+### map 
+- npm install ol

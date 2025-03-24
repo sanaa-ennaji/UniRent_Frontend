@@ -4,15 +4,15 @@ import { PropertyService } from '../../core/services/property.service';
 import { PropertyResponse } from '../../models/property.model';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { MapComponent } from "../map/map.component";
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MapComponent } from '../map/map.component';
 
 
 @Component({
   selector: 'app-property-list',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, MapComponent, FormsModule],
+  imports: [CommonModule, NavbarComponent, MapComponent,  FormsModule],
   templateUrl: './property-list.component.html',
   styleUrls: ['./property-list.component.css'],
 })

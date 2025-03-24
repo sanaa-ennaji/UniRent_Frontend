@@ -1,15 +1,27 @@
 import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { PropertyService } from '../../core/services/property.service';
-import { CommonModule } from '@angular/common';
-import { NavbarComponent } from "../../shared/navbar/navbar.component";
-import { Navbar2Component } from "../../shared/navbar2/navbar2.component";
 import { DataService } from '../../core/services/data.service';
 import { AuthService } from '../../core/services/auth.service';
 import { CloudinaryService } from '../../core/services/cloudinary.service';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from "../../shared/navbar/navbar.component";
+import { Navbar2Component } from "../../shared/navbar2/navbar2.component";
 import { UserPropertiesComponent } from "../user-properties/user-properties.component";
-import { isPlatformBrowser } from '@angular/common';
-declare var google: any;
+import { ReactiveFormsModule } from '@angular/forms';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+import { fromLonLat } from 'ol/proj';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { Style, Icon } from 'ol/style';
+
+
 @Component({
   selector: 'app-property-create',
   standalone: true,
@@ -17,7 +29,7 @@ declare var google: any;
   templateUrl: './property-create.component.html',
   styleUrls: ['./property-create.component.css']
 })
-export class PropertyCreateComponent implements OnInit {
+export class PropertyCreateComponent implements OnInit, AfterViewInit {
   propertyForm: FormGroup;
   universities: any[] = [];
   amenities: any[] = [];
@@ -25,8 +37,6 @@ export class PropertyCreateComponent implements OnInit {
   selectedUniversities: any[] = [];
   selectedAmenities: any[] = [];
   private isBrowser: boolean;
-  private map: any;
-  private marker: any;
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +47,7 @@ export class PropertyCreateComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
       address: ['', Validators.required],
@@ -50,7 +61,7 @@ export class PropertyCreateComponent implements OnInit {
       amenityIds: [[], Validators.required],
       personNumbers: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
       startDate: [null, [Validators.required, this.futureOrPresentValidator]],
-        latitude: [null],
+      latitude: [null],
       longitude: [null]
     });
   }
@@ -63,41 +74,6 @@ export class PropertyCreateComponent implements OnInit {
 
     this.fetchUniversities();
     this.fetchAmenities();
-  }
-
-  
-  ngAfterViewInit(): void {
-    if (this.isBrowser) {
-      this.initMap();
-    }
-  }
-  private initMap(): void {
-    const mapOptions = {
-      center: { lat: 31.7917, lng: -7.0926 }, 
-      zoom: 6 
-    };
-
-    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-
-    this.map.addListener('click', (event: any) => {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
-
-      this.propertyForm.patchValue({
-        latitude: lat,
-        longitude: lng
-      });
-
-      if (!this.marker) {
-        this.marker = new google.maps.Marker({
-          position: { lat, lng },
-          map: this.map
-        });
-      } else {
-        this.marker.setPosition({ lat, lng });
-      }
-    });
   }
 
   fetchUniversities(): void {
@@ -133,7 +109,7 @@ export class PropertyCreateComponent implements OnInit {
         this.propertyForm.patchValue({
           universityIds: this.selectedUniversities.map(u => u.id),
         });
-        selectElement.value = ''; 
+        selectElement.value = '';
       }
     }
   }
@@ -173,22 +149,72 @@ export class PropertyCreateComponent implements OnInit {
       ...this.selectedFiles.slice(index + 1)
     ];
   }
+
   futureOrPresentValidator(control: AbstractControl): ValidationErrors | null {
     const selectedDate = new Date(control.value);
     const today = new Date();
-    today.setHours(0, 0, 0, 0); 
-  
+    today.setHours(0, 0, 0, 0);
+
     if (selectedDate < today) {
       return { futureOrPresent: true };
     }
     return null;
   }
+
   getControl(controlName: string): AbstractControl | null {
     return this.propertyForm.get(controlName);
   }
 
- 
+  ngAfterViewInit(): void {
+    if (this.isBrowser) {
+      const map = new Map({
+        target: 'map',
+        layers: [
+          new TileLayer({
+            source: new OSM()
+          })
+        ],
+        view: new View({
+          center: fromLonLat([-7.0926, 31.7917]), 
+          zoom: 6
+        })
+      });
 
+      let marker: Feature | null = null;
+
+      map.on('click', (event: any) => {
+        const coordinate = event.coordinate;
+        const lonLat = fromLonLat(coordinate);
+
+        this.propertyForm.patchValue({
+          latitude: lonLat[1],
+          longitude: lonLat[0]
+        });
+
+        if (marker) {
+          marker.setGeometry(new Point(coordinate));
+        } else {
+          marker = new Feature({
+            geometry: new Point(coordinate)
+          });
+
+          const vectorLayer = new VectorLayer({
+            source: new VectorSource({
+              features: [marker]
+            }),
+            style: new Style({
+              image: new Icon({
+                src: 'https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/theme/default/img/marker.png',
+                scale: 1
+              })
+            })
+          });
+
+          map.addLayer(vectorLayer);
+        }
+      });
+    }
+  }
 
   onSubmit(): void {
     if (this.propertyForm.valid) {

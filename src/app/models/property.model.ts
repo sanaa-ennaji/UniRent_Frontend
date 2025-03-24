@@ -31,6 +31,8 @@ export interface PropertyRequest {
     landlordName: string;
     startDate: string ; 
     personNumbers: number; 
+    latitude: number; 
+    longitude: number;
   }
   
   export interface AmenityResponse {
