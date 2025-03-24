@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { UniversityService } from '../../core/services/university.service';
 import { PropertyService } from '../../core/services/property.service';
 
-// OpenLayers Imports
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -204,7 +203,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           }
         });
         
-        // Force redraw of the layer
+    
         propertyLayer.changed();
         console.log('All properties added to the map.');
       },
@@ -213,7 +212,6 @@ export class MapComponent implements OnInit, AfterViewInit {
       }
     );
 
-    // Add click handler for university features and property navigation
     this.map.on('click', (event) => {
       if (!this.map) return;
       
