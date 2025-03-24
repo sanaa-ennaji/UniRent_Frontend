@@ -5,8 +5,6 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoginRequestDTO } from '../../models/login-request.model';
 import { AuthenticationResponse } from '../../models/authResponse.model';
-import { UserRequestDTO } from '../../models/user-request.model';
-import { UserResponseDTO } from '../../models/user-response.model';
 
 
 @Injectable({

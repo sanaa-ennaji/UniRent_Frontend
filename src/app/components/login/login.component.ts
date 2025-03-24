@@ -32,8 +32,7 @@ export class LoginComponent {
       const credentials: LoginRequestDTO  = this.loginForm.value;
       this.authService.login(credentials).subscribe({
         next: (response) => {
-          console.log('Login successful:', response);
-          this.router.navigate(['/register']); 
+          this.router.navigate(['/propertyList']); 
         },
         error: (error) => {
           console.error('Login failed:', error);
